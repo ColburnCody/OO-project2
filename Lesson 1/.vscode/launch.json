@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - PiggyBankTest",
+            "request": "launch",
+            "mainClass": "Test.PiggyBankTest",
+            "projectName": "Lesson 1_f787368e"
+        },
+        {
+            "type": "java",
             "name": "Debug (Launch) - Current File",
             "request": "launch",
             "mainClass": "${file}"
@@ -23,6 +30,14 @@
             "request": "launch",
             "vmArgs": "-ea",
             "mainClass": "Test.TestCalc",
+            "projectName": "Lesson 1_f787368e"
+        },
+        {
+            "type": "java",
+            "name": "PiggyBankTest",
+            "request": "launch",
+            "vmArgs": "-ea",
+            "mainClass": "Test.PiggyBankTest",
             "projectName": "Lesson 1_f787368e"
         }
     ]
