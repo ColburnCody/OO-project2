@@ -1,27 +1,27 @@
 package model;
 
+import java.util.Random;
+
 public class Warrior {
 
-    private int health;
-    private int attack;
-    private int defense;
+    private int health = 50;
+    private int attack = 20;
 
-    public Warrior(int h, int a, int d){
-        health = h;
-        attack = a;
-        defense = d;
-    }
-
-    public int getHealth(){
+    public int getHealth() {
         return health;
     }
 
     public int getAttack(){
-        return attack;
-    }
-
-    public int getDefense(){
-        return defense;
+        int crit;
+        Random rand = new Random();
+        crit = rand.nextInt(4) + 1;
+        if(crit == 2){
+            int critAttack = attack * 2;
+            return critAttack;
+        }
+        else{
+            return attack;
+        }
     }
     
 }

@@ -12,36 +12,29 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import controller.ButtonClickListener;
+import model.Dragon;
 import model.Warrior;
 
 public class BattleSimulator {
 
     private JFrame window;
 
-    private JTextArea display = new JTextArea("A little tiny dragon appears! Can you beat him?");
+    private Warrior hero = new Warrior();
+
+    private Dragon dragon = new Dragon();
+
+    private JTextArea display = new JTextArea("You decided to fight the little tiny baby dragon! Can you beat him and steal his gold???");
 
     private JButton attackButton = new JButton("Attack!");
-    private JButton defendButton = new JButton("Block!");
     private JButton exitButton = new JButton("Exit");
-    private int heroType;
 
-    private Warrior hero;
 
-    public BattleSimulator(JFrame window, int x){
+    public BattleSimulator(JFrame window){
         this.window = window;
         window.setTitle("Defeat the dragon!");
-        heroType = x;
     }
 
     public void init(){
-
-        if(heroType == 0){
-            hero = new Warrior(50, 18, 20);
-        } else if(heroType == 1){
-            hero = new Warrior(40, 23, 15);
-        } else if(heroType == 2){
-            hero = new Warrior(45, 19, 18);
-        }
 
         Container cp = window.getContentPane();
         var scrollPane = new JScrollPane(display, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -54,7 +47,6 @@ public class BattleSimulator {
 
         JPanel row1 = new JPanel();
         row1.add(attackButton);
-        row1.add(defendButton);
         southPanel.add(row1);
 
         JPanel row2 = new JPanel();
@@ -64,7 +56,6 @@ public class BattleSimulator {
         ButtonClickListener buttonClickListener = new ButtonClickListener(this);
         exitButton.addActionListener(buttonClickListener);
         attackButton.addActionListener(buttonClickListener);
-        defendButton.addActionListener(buttonClickListener);
 
     }
 
@@ -74,10 +65,6 @@ public class BattleSimulator {
 
     public JButton getAttackButton(){
         return attackButton;
-    }
-
-    public JButton getDefendButton(){
-        return defendButton;
     }
 
     public JFrame getWindow(){
@@ -90,5 +77,9 @@ public class BattleSimulator {
 
     public Warrior getHero(){
         return hero;
+    }
+
+    public Dragon getDragon(){
+        return dragon;
     }
 }

@@ -6,8 +6,10 @@ import java.awt.Container;
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
 
 import javax.swing.JButton;
 
@@ -15,9 +17,8 @@ public class MenuScreen {
 
     private JFrame window;
 
-    private JButton warriorButton = new JButton("Play as a warrior!");
-    private JButton wizardButton = new JButton("Play as a wizard!");
-    private JButton rangerButton = new JButton("Play as a ranger!");
+    private JLabel label = new JLabel("A little tiny baby dragon appears! What will you do?!?");
+    private JButton warriorButton = new JButton("Strut confidently towards the little tiny baby dragon!");
     private JButton cowardButton = new JButton("Bravely retreat!");
 
     public MenuScreen(final JFrame window) {
@@ -33,32 +34,17 @@ public class MenuScreen {
         cp.add(panel);
 
         JPanel row1 = new JPanel();
-        row1.add(warriorButton);
-        row1.add(wizardButton);
-        row1.add(rangerButton);
+        row1.add(label);
         panel.add(BorderLayout.CENTER, row1);
 
         JPanel row2 = new JPanel();
+        row2.add(warriorButton);
         row2.add(cowardButton);
         panel.add(BorderLayout.CENTER, row2);
 
         warriorButton.addActionListener(e -> {
             window.getContentPane().removeAll();
-            var battle = new BattleSimulator(window, 0);
-            battle.init();
-            window.pack();
-            window.revalidate();
-        });
-        wizardButton.addActionListener(e -> {
-            window.getContentPane().removeAll();
-            var battle = new BattleSimulator(window, 1);
-            battle.init();
-            window.pack();
-            window.revalidate();
-        });
-        rangerButton.addActionListener(e -> {
-            window.getContentPane().removeAll();
-            var battle = new BattleSimulator(window, 2);
+            var battle = new BattleSimulator(window);
             battle.init();
             window.pack();
             window.revalidate();
