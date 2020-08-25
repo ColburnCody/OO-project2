@@ -12,7 +12,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import controller.ButtonClickListener;
-import model.Dragon;
 import model.Warrior;
 
 public class BattleSimulator {
@@ -24,23 +23,26 @@ public class BattleSimulator {
     private JButton attackButton = new JButton("Attack!");
     private JButton defendButton = new JButton("Block!");
     private JButton exitButton = new JButton("Exit");
+    private int heroType;
 
-    private Dragon dragon = new Dragon();
     private Warrior hero;
 
     public BattleSimulator(JFrame window, int x){
         this.window = window;
         window.setTitle("Defeat the dragon!");
-        if(x == 0){
-            hero = new Warrior(50, 18, 20);
-        } else if(x == 1){
-            hero = new Warrior(40, 23, 15);
-        } else if(x == 2){
-            hero = new Warrior(45, 19, 18);
-        }
+        heroType = x;
     }
 
     public void init(){
+
+        if(heroType == 0){
+            hero = new Warrior(50, 18, 20);
+        } else if(heroType == 1){
+            hero = new Warrior(40, 23, 15);
+        } else if(heroType == 2){
+            hero = new Warrior(45, 19, 18);
+        }
+
         Container cp = window.getContentPane();
         var scrollPane = new JScrollPane(display, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setPreferredSize(new Dimension(500,500));
@@ -88,9 +90,5 @@ public class BattleSimulator {
 
     public Warrior getHero(){
         return hero;
-    }
-
-    public Dragon getDragon(){
-        return dragon;
     }
 }
