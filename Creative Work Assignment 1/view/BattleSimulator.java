@@ -89,4 +89,8 @@ public class BattleSimulator {
     public Warrior getHero(){
         return hero;
     }
+
+    public Dragon getDragon(){
+        return dragon;
+    }
 }

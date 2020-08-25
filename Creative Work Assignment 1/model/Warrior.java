@@ -12,8 +12,16 @@ public class Warrior {
         defense = d;
     }
 
-    public int attk(){
+    public int getHealth(){
+        return health;
+    }
+
+    public int getAttack(){
         return attack;
+    }
+
+    public int getDefense(){
+        return defense;
     }
     
 }

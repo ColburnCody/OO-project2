@@ -11,6 +11,11 @@ import view.MenuScreen;
 public class ButtonClickListener implements ActionListener{
 
     private BattleSimulator panel;
+    private int dragonHealth = panel.getDragon().getHealth();
+    private int dragonAttack = panel.getDragon().getAttack();
+    private int heroHealth = panel.getHero().getHealth();
+    private int heroAttack = panel.getHero().getAttack();
+    private int heroDefense = panel.getHero().getDefense();
 
     public ButtonClickListener(BattleSimulator panel){
         this.panel = panel;
@@ -28,7 +33,8 @@ public class ButtonClickListener implements ActionListener{
             window.pack();
             window.revalidate();
         } else if(button == panel.getAttackButton()){
-            
+            dragonHealth -= heroAttack;
+            panel.getDisplay().setText(m + "You attack the dragon! He has " + dragonHealth + " health left!");
         }
     }
     
