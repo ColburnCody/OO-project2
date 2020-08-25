@@ -8,24 +8,27 @@ import javax.swing.JFrame;
 import view.BattleSimulator;
 import view.MenuScreen;
 
-public class ButtonClickListener implements ActionListener {
+public class ButtonClickListener implements ActionListener{
 
-    private MenuScreen panel;
+    private BattleSimulator panel;
 
-    public ButtonClickListener(MenuScreen panel){
+    public ButtonClickListener(BattleSimulator panel){
         this.panel = panel;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         var button = e.getSource();
-        if(button == panel.getWarrior()){
+        String m = panel.getDisplay().getText() + "\n";
+        if(button == panel.getExitButton()){
             JFrame window = panel.getWindow();
             window.getContentPane().removeAll();
-            var battle = new BattleSimulator(window, 0);
-            battle.init();
+            var menu = new MenuScreen(window);
+            menu.init();
             window.pack();
             window.revalidate();
+        } else if(button == panel.getAttackButton()){
+            
         }
     }
     

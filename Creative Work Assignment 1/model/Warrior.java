@@ -2,8 +2,18 @@ package model;
 
 public class Warrior {
 
-    private int health = 50;
-    private int attack = 18;
-    private int defense = 20;
+    private int health;
+    private int attack;
+    private int defense;
+
+    public Warrior(int h, int a, int d){
+        health = h;
+        attack = a;
+        defense = d;
+    }
+
+    public int attk(){
+        return attack;
+    }
     
 }
