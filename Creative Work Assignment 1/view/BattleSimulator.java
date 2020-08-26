@@ -25,7 +25,7 @@ public class BattleSimulator {
 
     private JButton attackButton = new JButton("Attack!");
     private JButton exitButton = new JButton("Exit");
-    private int heroType;
+    public int heroType;
 
 
     public BattleSimulator(JFrame window, int x){
@@ -35,6 +35,8 @@ public class BattleSimulator {
     }
 
     private Hero hero = new Hero(heroType);
+
+
 
     public void init(){
 

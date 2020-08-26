@@ -13,10 +13,10 @@ public class Hero {
             attack = 25;
         } else if(x == 1){
             health = 40;
-            attack = 30;
-        } else if(x == 2){
+            attack = 35;
+        } else{
             health = 45;
-            attack = 27;
+            attack = 30;
         }
     }
 
