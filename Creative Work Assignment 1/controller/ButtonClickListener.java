@@ -11,17 +11,9 @@ import view.MenuScreen;
 public class ButtonClickListener implements ActionListener{
 
     private BattleSimulator panel;
-    private int heroHealth;
-    private int heroAttack;
-    private int dragonHealth;
-    private int dragonAttack;
 
     public ButtonClickListener(BattleSimulator panel){
         this.panel = panel;
-        heroHealth = panel.getHero().getHealth();
-        heroAttack = panel.getHero().getAttack();
-        dragonHealth = panel.getDragon().getHealth();
-        dragonAttack = panel.getDragon().getAttack();
 
     }
 
@@ -37,14 +29,15 @@ public class ButtonClickListener implements ActionListener{
             window.pack();
             window.revalidate();
         } else if(button == panel.getAttackButton()){
-            if(dragonHealth > 0 && heroHealth > 0){
-                dragonHealth -= heroAttack;
-                heroHealth -= dragonAttack;
-                panel.getDisplay().setText(m + "You attack the dragon! He has " + dragonHealth + " health left!\n" +  "The dragon attacks you! You have " + heroHealth + " health left!\n");
-            }else if(dragonHealth <= 0){
-                panel.getDisplay().setText(m + "The dragon got scared and ran away! You're the best at pushing buttons!\n");
-            }else if(heroHealth <= 0){
-                panel.getDisplay().setText(m + "You decided to bravely run away from this little tiny baby dragon!\n");
+                panel.getDragon().combat(panel.getHero().getAttack());
+                panel.getHero().combat(panel.getDragon().getAttack());
+                panel.getDisplay().setText(m + "The dragon has attacked you! You have " + panel.getHero().getHealth() + " health left!\nYou attacked the dragon! He has " + panel.getDragon().getHealth() + " health left!");
+            if(panel.getDragon().getHealth() <= 0){
+                panel.getDisplay().setText(m + "The dragon has fled! You were so brave and cool and the best at pushing buttons!");
+                panel.getAttackButton().setEnabled(false);
+            } else if(panel.getHero().getHealth() <= 0){
+                panel.getDisplay().setText(m + "You decided that the dragon seemed happy with his gold and bravely ran away!\nWhat a hero!");
+                panel.getAttackButton().setEnabled(false);
             }
         }
     }

@@ -13,13 +13,11 @@ import javax.swing.JTextArea;
 
 import controller.ButtonClickListener;
 import model.Dragon;
-import model.Warrior;
+import model.Hero;
 
 public class BattleSimulator {
 
     private JFrame window;
-
-    private Warrior hero = new Warrior();
 
     private Dragon dragon = new Dragon();
 
@@ -27,12 +25,16 @@ public class BattleSimulator {
 
     private JButton attackButton = new JButton("Attack!");
     private JButton exitButton = new JButton("Exit");
+    private int heroType;
 
 
-    public BattleSimulator(JFrame window){
+    public BattleSimulator(JFrame window, int x){
         this.window = window;
         window.setTitle("Defeat the dragon!");
+        heroType = x;
     }
+
+    private Hero hero = new Hero(heroType);
 
     public void init(){
 
@@ -75,7 +77,7 @@ public class BattleSimulator {
         return display;
     }
 
-    public Warrior getHero(){
+    public Hero getHero(){
         return hero;
     }
 

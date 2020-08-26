@@ -18,8 +18,10 @@ public class MenuScreen {
     private JFrame window;
 
     private JLabel label = new JLabel("A little tiny baby dragon appears! What will you do?!?");
-    private JButton warriorButton = new JButton("Strut confidently towards the little tiny baby dragon!");
-    private JButton cowardButton = new JButton("Bravely retreat!");
+    private JButton warriorButton = new JButton("Play as a warrior");
+    private JButton wizardButton = new JButton("Play as a wizard");
+    private JButton rangerButton = new JButton("Play as a ranger");
+    private JButton cowardButton = new JButton("Leave the lil guy alone");
 
     public MenuScreen(final JFrame window) {
         this.window = window;
@@ -30,7 +32,7 @@ public class MenuScreen {
         Container cp = window.getContentPane();
         JPanel panel = new JPanel();
         panel.setPreferredSize(new Dimension(400, 200));
-        panel.setLayout(new GridLayout(2, 4));
+        panel.setLayout(new GridLayout(3, 3));
         cp.add(panel);
 
         JPanel row1 = new JPanel();
@@ -39,12 +41,33 @@ public class MenuScreen {
 
         JPanel row2 = new JPanel();
         row2.add(warriorButton);
-        row2.add(cowardButton);
+        row2.add(wizardButton);
+        row2.add(rangerButton);
         panel.add(BorderLayout.CENTER, row2);
+
+        JPanel row3 = new JPanel();
+        row3.add(cowardButton);
+        panel.add(BorderLayout.CENTER, row3);
 
         warriorButton.addActionListener(e -> {
             window.getContentPane().removeAll();
-            var battle = new BattleSimulator(window);
+            var battle = new BattleSimulator(window, 0);
+            battle.init();
+            window.pack();
+            window.revalidate();
+        });
+
+        wizardButton.addActionListener(e -> {
+            window.getContentPane().removeAll();
+            var battle = new BattleSimulator(window, 1);
+            battle.init();
+            window.pack();
+            window.revalidate();
+        });
+
+        rangerButton.addActionListener(e -> {
+            window.getContentPane().removeAll();
+            var battle = new BattleSimulator(window, 2);
             battle.init();
             window.pack();
             window.revalidate();
