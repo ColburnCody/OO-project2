@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controller.BaseballKeyListener;
 import model.BaseballGame;
 
 
@@ -34,6 +35,8 @@ public class BaseballGamePanel {
     public void init(){
         Container cp = window.getContentPane();
 
+        BaseballKeyListener keyListener = new BaseballKeyListener(this);
+
         JPanel northPanel = new JPanel();
         northPanel.setLayout(new GridLayout(2, 2));
         northPanel.add(new JLabel("Secret Game Key: "));
@@ -53,13 +56,18 @@ public class BaseballGamePanel {
         for(int i = 0; i < 10; i++){
             digitButtons[i] = new JButton("" + i);
             southPanel.add(digitButtons[i]);
+            digitButtons[i].addActionListener(keyListener);
         }
         for(var b: digitButtons){
             b.setEnabled(false);
         }
         southPanel.add(playButton);
+        playButton.addActionListener(keyListener);
         southPanel.add(exitButton);
+        exitButton.addActionListener(keyListener);
         cp.add(BorderLayout.SOUTH, southPanel);
+
+        
 
     }
 
