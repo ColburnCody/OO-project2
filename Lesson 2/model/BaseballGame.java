@@ -13,6 +13,12 @@ public class BaseballGame {
         generateKey();
     }
 
+    public BaseballGame(int k0, int k1, int k2){
+        key[0] = k0;
+        key[1] = k1;
+        key[2] = k2;
+    }
+
     public void setGuess(int pos, int value){
         assert 0 <= pos && pos < 3 : "setGuess out of range in position";
         guess[pos] = value;
