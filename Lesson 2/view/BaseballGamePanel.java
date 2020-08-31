@@ -17,6 +17,10 @@ import model.BaseballGame;
 
 public class BaseballGamePanel {
 
+    public enum GameState {
+        READY, PLAYING, GAMEOVER
+    }
+
     private JFrame window;
     private BaseballCanvas canvas;
 
@@ -25,6 +29,8 @@ public class BaseballGamePanel {
     private JButton[] digitButtons;
     private JButton playButton = new JButton("Play Ball~~");
     private JButton exitButton = new JButton("Exit");
+
+    private GameState gameState = GameState.PLAYING;
 
     private BaseballGame baseball;
 
@@ -101,6 +107,14 @@ public class BaseballGamePanel {
 
     public JButton getExitButton(){
         return exitButton;
+    }
+
+    public GameState getGameState(){
+        return gameState;
+    }
+
+    public void setGameState(GameState state){
+        this.gameState = state;       
     }
     
 }
