@@ -34,7 +34,7 @@ public class BaseballGame {
         for(int i = 0; i < 3; i++){
             for(int n = 0; n < 3; n++){
                 if(i == n) continue;
-                if(key[i] == guess[j]) ballCount++;
+                if(key[i] == guess[n]) ballCount++;
             }
         }
     }
