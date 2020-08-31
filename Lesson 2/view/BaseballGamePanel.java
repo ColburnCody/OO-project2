@@ -30,7 +30,7 @@ public class BaseballGamePanel {
     private JButton playButton = new JButton("Play Ball~~");
     private JButton exitButton = new JButton("Exit");
 
-    private GameState gameState = GameState.PLAYING;
+    private GameState gameState = GameState.READY;
 
     private BaseballGame baseball;
 
@@ -89,7 +89,7 @@ public class BaseballGamePanel {
         return canvas;
     }
 
-    public JTextField getGameKey(){
+    public JTextField getGameKeyField(){
         return gameKeyField;
     }
 
@@ -115,6 +115,14 @@ public class BaseballGamePanel {
 
     public void setGameState(GameState state){
         this.gameState = state;       
+    }
+
+    public BaseballGame getBaseball(){
+        return baseball;
+    }
+
+    public void setBaseball(BaseballGame baseball){
+        this.baseball = baseball;
     }
     
 }
