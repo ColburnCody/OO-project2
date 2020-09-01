@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JTextField;
 
 import model.BaseballGame;
 import view.BaseballGamePanel;
@@ -13,6 +14,7 @@ import view.MenuScreen;
 public class BaseballKeyListener implements ActionListener{
 
     private BaseballGamePanel panel;
+    private int clicks = 0;
 
     public BaseballKeyListener(BaseballGamePanel panel){
         this.panel = panel;
@@ -33,6 +35,7 @@ public class BaseballKeyListener implements ActionListener{
             for (var b: panel.getDigitButtons()){
                 b.setEnabled(true);
             }
+            panel.getCanvas().setBallStrikeCount(0, 0);
             panel.getCanvas().repaint();
         } else if(button == panel.getExitButton()){
             JFrame window = panel.getWindow();
@@ -41,6 +44,43 @@ public class BaseballKeyListener implements ActionListener{
             menu.init();
             window.pack();
             window.revalidate();
+        } else{
+            // digit button 0 - 9
+            button.setEnabled(false);
+
+            JTextField guessfield = panel.getGuessField();
+            if(clicks == 0){
+                guessfield.setText("");
+            }
+
+            BaseballGame baseball = panel.getBaseball();
+            String n = button.getText();
+            guessfield.setText(guessfield.getText() + n);
+            baseball.setGuess(clicks, n.charAt(0) - '0');
+            clicks++;
+
+            if(clicks == 3){
+                baseball.computeBallsStrikes();
+                int balls = baseball.getBallCount();
+                int strikes = baseball.getStrikeCount();
+                panel.getCanvas().setBallStrikeCount(balls, strikes);
+
+                if(strikes == 3){
+                    panel.setGameState(BaseballGamePanel.GameState.GAMEOVER);
+                    for(var b: panel.getDigitButtons()){
+                        b.setEnabled(false);
+                    }
+                }else{
+                    // enable all digit buttons
+                    for(var b:panel.getDigitButtons()){
+                        b.setEnabled(true);
+                    }
+                }
+
+                clicks = 0;
+                panel.getCanvas().repaint();
+            }
+
         }
 
     }
