@@ -3,6 +3,7 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Container;
+import java.awt.event.MouseEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -26,11 +27,11 @@ public class TriangleDrawingPanel {
     private JButton clearButton = new JButton("Clear");
     private JButton exitButton = new JButton("Exit");
 
-    public TriangleDrawingPanel(JFrame window){
+    public TriangleDrawingPanel(JFrame window) {
         this.window = window;
     }
 
-    public void init(){
+    public void init() {
         Container cp = window.getContentPane();
 
         JPanel southPanel = new JPanel();
@@ -53,47 +54,52 @@ public class TriangleDrawingPanel {
         TitledBorder title = BorderFactory.createTitledBorder("Color");
         radioPanel.setBorder(title);
 
-
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(clearButton);
         buttonPanel.add(exitButton);
         southPanel.add(buttonPanel);
 
-        canvas = new TriangleCanvas(this);
+        canvas = new TriangleCanvas(this);;
         cp.add(BorderLayout.CENTER, canvas);
 
-        //attach event listener
+        // attach event listener
         TriangleEventListener listener = new TriangleEventListener(this);
         exitButton.addActionListener(listener);
         clearButton.addActionListener(listener);
         redButton.addActionListener(listener);
         yellowButton.addActionListener(listener);
         blueButton.addActionListener(listener);
+        canvas.addMouseListener(listener);
 
     }
 
-    public JButton getExitButton(){
+    public JButton getExitButton() {
         return exitButton;
     }
 
-    public JButton getClearButton(){
+    public JButton getClearButton() {
         return clearButton;
     }
 
-    public JRadioButton getRedButton(){
+    public JRadioButton getRedButton() {
         return redButton;
     }
 
-    public JRadioButton getYellowButton(){
+    public JRadioButton getYellowButton() {
         return yellowButton;
     }
 
-    public JRadioButton getBlueButton(){
+    public JRadioButton getBlueButton() {
         return blueButton;
     }
 
-    public JFrame getWindow(){
+    public JFrame getWindow() {
         return window;
     }
-    
+
+    public TriangleCanvas getCanvas(){
+        return canvas;
+    }
+
 }
+
