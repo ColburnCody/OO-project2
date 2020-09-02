@@ -57,12 +57,13 @@ public class BattleSimulator {
         cp.add(BorderLayout.CENTER, canvas);
 
         JPanel southPanel = new JPanel();
-        southPanel.setLayout(new GridLayout(1, 3));
-        southPanel.add(fightButton);
-        southPanel.add(rewardButton);
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(fightButton);
+        buttonPanel.add(rewardButton);
         rewardButton.setEnabled(false);
-        southPanel.add(exitButton);
-        cp.add(BorderLayout.SOUTH, southPanel);
+        buttonPanel.add(exitButton);
+        southPanel.add(buttonPanel);
+        cp.add(BorderLayout.SOUTH, buttonPanel);
 
         BattleActionListener listener = new BattleActionListener(this);
         canvas.addMouseListener(listener);
