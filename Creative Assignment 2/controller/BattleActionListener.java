@@ -31,6 +31,7 @@ public class BattleActionListener implements ActionListener, MouseListener{
                 panel.getDragon().setHealth();
                 panel.getHero().setHealth();
             }
+            panel.getFightButton().setEnabled(false);
             panel.getRewardButton().setEnabled(false);
             panel.setGameState(BattleSimulator.GameState.PLAYING);
             panel.getCanvas().repaint();
@@ -47,7 +48,7 @@ public class BattleActionListener implements ActionListener, MouseListener{
             Random r = new Random();
             int reward = r.nextInt(100);
             JOptionPane.showMessageDialog(null, "You stole " + reward + " gold from that tiny baby dragon!", "You're the best at clicking", JOptionPane.CANCEL_OPTION);
-            panel.getFightButton().setEnabled(true);
+            panel.getRewardButton().setEnabled(false);
         }
 
     }
@@ -61,9 +62,12 @@ public class BattleActionListener implements ActionListener, MouseListener{
             panel.getHeroHealth().setText(""+panel.getHero().getHealth());
             if(panel.getDragon().getHealth() <= 0){
                 panel.setGameState(BattleSimulator.GameState.GAMEOVER);
+                panel.getFightButton().setEnabled(true);
+                panel.getRewardButton().setEnabled(true);
                 panel.getCanvas().repaint();
             }else if(panel.getHero().getHealth() <= 0){
                 panel.setGameState(BattleSimulator.GameState.GAMEOVER);
+                panel.getFightButton().setEnabled(true);
                 panel.getCanvas().repaint();
             }
         }

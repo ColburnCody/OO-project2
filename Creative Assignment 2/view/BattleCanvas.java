@@ -49,7 +49,6 @@ public class BattleCanvas extends JPanel{
                     g2.setFont(new Font("Courier", Font.BOLD, 30));
                     g2.drawString("You beat the dragon!", 70, 150);
                     g2.drawString("Collect your reward!", 90, 190);
-                    panel.getRewardButton().setEnabled(true);
                 } else if(panel.getHero().getHealth() <= 0){
                     g2.setColor(Color.red);
                     g2.setFont(new Font("Courier", Font.BOLD, 30));
@@ -57,7 +56,6 @@ public class BattleCanvas extends JPanel{
                     
                 }
             }
-            panel.getFightButton().setEnabled(false);
             g2.setColor(heroColor);
             g2.drawOval(50, 50, 80, 80);
             g2.drawLine(91, 129, 91, 285);
