@@ -72,7 +72,7 @@ public class MenuScreen {
                 battle.init();
                 window.pack();
                 window.revalidate();
-            } else if (warriorButton.isSelected()) {
+            } else if (rangerButton.isSelected()) {
                 window.getContentPane().removeAll();
                 var battle = new BattleSimulator(window);
                 battle.init();

@@ -73,6 +73,14 @@ public class BattleSimulator {
 
     }
 
+    public JTextField getDragonHealth(){
+        return dragonHealth;
+    }
+
+    public JTextField getHeroHealth(){
+        return heroHealth;
+    }
+
     public Hero getHero(){
         return hero;
     }
@@ -100,5 +108,12 @@ public class BattleSimulator {
     public GameState getGameState(){
         return gameState;
     }
+
+    public void setGameState(GameState state){
+        this.gameState = state;
+    }
     
+    public JFrame getWindow(){
+        return window;
+    }
 }
