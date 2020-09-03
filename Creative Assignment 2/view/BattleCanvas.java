@@ -63,6 +63,29 @@ public class BattleCanvas extends JPanel{
             g2.drawLine(91, 285, 142, 368);
             g2.drawLine(88, 181, 183, 181);
             g2.drawLine(88, 181, 11, 181);
+            if(heroString == "warrior"){
+                g2.setColor(Color.yellow);
+                g2.drawLine(186, 202, 186, 168);
+                g2.setColor(Color.white);
+                g2.drawLine(168, 164, 204, 168);
+                g2.setColor(Color.gray);
+                g2.drawLine(186, 168, 193, 47);
+            } else if(heroString == "wizard"){
+                g2.setColor(Color.magenta);
+                g2.drawLine(29, 50, 155, 50);
+                g2.drawLine(58, 50, 83, 5);
+                g2.drawLine(83, 5, 129, 50);
+                g2.setColor(Color.gray);
+                g2.drawLine(188, 317, 188, 57);
+                g2.setColor(Color.white);
+                g2.fillOval(173, 57, 20, 20);
+            }else if(heroString == "ranger"){
+                g2.setColor(Color.white);
+                g2.drawLine(188, 121, 188, 232);
+                g2.setColor(Color.gray);
+                g2.drawLine(188, 121, 246, 175);
+                g2.drawLine(188, 232, 246, 175);
+            }
             g2.setColor(Color.green);
             g2.fillOval(354, 20, 100, 100);
             g2.drawLine(423, 115, 499, 164);
@@ -72,7 +95,7 @@ public class BattleCanvas extends JPanel{
             g2.drawLine(321, 131, 391, 110);
             g2.setColor(Color.yellow);
             g2.setFont(new Font("Courier", Font.BOLD, 30));
-            g2.drawString("Click to fight the dragon!", 103, 422);
+            g2.drawString("Click to battle the dragon!", 103, 422);
             
             
         }
