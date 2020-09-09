@@ -69,4 +69,8 @@ public class WordGuessPanel {
 
     }
 
+    public WordGuessGame getWordGuessGame(){
+        return wordguessgame;
+    }
+
 }
