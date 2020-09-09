@@ -73,4 +73,42 @@ public class WordGuessPanel {
         return wordguessgame;
     }
 
+    public void setWordGuessGame(WordGuessGame game){
+        this.wordguessgame = game;
+    }
+
+    public JFrame getWindow(){
+        return window;
+    }
+
+    public WordGuessCanvas getCanvas(){
+        return canvas;
+    }
+
+    public JTextField getSolutionField(){
+        return solutionField;
+    }
+
+    public JTextField getGuessField(){
+        return answerField;
+    }
+
+    public JButton[] getGuessButtons(){
+        return guessButtons;
+    }
+
+    public JButton getNewButton(){
+        return newButton;
+    }
+
+    public GameState getGameState(){
+        return gameState;
+    }
+
+    public void setGameState(GameState state){
+        this.gameState = state;
+    }
+
+
+
 }
