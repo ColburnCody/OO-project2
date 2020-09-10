@@ -7,7 +7,7 @@ public class WordGuessGame {
 
     public ArrayList<String> solutions = new ArrayList<String>();
 
-    private char guess;
+    private String guess;
     private String answer;
     private int lives = 5;
 
@@ -59,8 +59,12 @@ public class WordGuessGame {
         return answer;
     }
 
-    public void setGuess(char c){
+    public void setGuess(String c){
         guess = c;
+    }
+
+    public String getGuess(){
+        return guess;
     }
 
     public int getLives(){
@@ -70,7 +74,4 @@ public class WordGuessGame {
         return lives;
     }
 
-    public void checkGuess(){
-        // TODO
-    }
 }

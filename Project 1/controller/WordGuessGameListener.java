@@ -14,6 +14,8 @@ public class WordGuessGameListener implements ActionListener{
 
     private WordGuessPanel panel;
 
+    private WordGuessGame wordguess;
+
     public WordGuessGameListener(WordGuessPanel panel){
         this.panel = panel;
     }
@@ -22,7 +24,7 @@ public class WordGuessGameListener implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         JButton button = (JButton) e.getSource();
         if(button == panel.getNewButton()){
-            var wordguess = new WordGuessGame();
+            wordguess = new WordGuessGame();
             panel.setWordGuessGame(wordguess);
             panel.setGameState(WordGuessPanel.GameState.PLAYING);
             String answer = wordguess.getSolution();
@@ -40,7 +42,12 @@ public class WordGuessGameListener implements ActionListener{
             }
             panel.getCanvas().setLives(wordguess.getLives());
             panel.getCanvas().repaint();
-        }
+        } else{
+            button.setEnabled(false);
+            String guess = button.getText();
+            wordguess.setGuess(guess);
+            }
+        
 
     }
     
