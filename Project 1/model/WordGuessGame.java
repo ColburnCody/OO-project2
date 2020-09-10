@@ -46,7 +46,6 @@ public class WordGuessGame {
         solutions.add("heavily");
         solutions.add("graphics");
         answer = generateSolution();
-        System.out.println(answer);
     }
     
 
@@ -56,11 +55,18 @@ public class WordGuessGame {
         return solutions.get(solution);
     }
 
+    public String getSolution(){
+        return answer;
+    }
+
     public void setGuess(char c){
         guess = c;
     }
 
     public int getLives(){
+        if(lives == 0){
+            lives = 5;
+        }
         return lives;
     }
 

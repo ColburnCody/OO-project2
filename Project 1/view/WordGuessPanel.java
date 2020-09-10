@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controller.WordGuessGameListener;
 import model.WordGuessGame;
 
 public class WordGuessPanel {
@@ -57,13 +58,16 @@ public class WordGuessPanel {
         JPanel southPanel = new JPanel();
         southPanel.setLayout(new GridLayout(4, 7));
         ButtonGroup letterGroup = new ButtonGroup();
+        WordGuessGameListener listener = new WordGuessGameListener(this);
         guessButtons = new JButton[26];
         for(int i = 0; i < 26; i++){
             guessButtons[i] = new JButton(letters[i]);
             guessButtons[i].setEnabled(false);
+            guessButtons[i].addActionListener(listener);
             letterGroup.add(guessButtons[i]);
             southPanel.add(guessButtons[i]);
         }
+        newButton.addActionListener(listener);
         southPanel.add(newButton);
         cp.add(BorderLayout.SOUTH, southPanel);
 
