@@ -38,6 +38,7 @@ public class WordGuessGameListener implements ActionListener{
             }
             guesses = guessText.toCharArray();
             panel.getGuessField().setText(guessText);
+            panel.getGuessField().setFont(new Font("Courier", Font.BOLD, 15));
             panel.getSolutionField().setText(answer);
             panel.getSolutionField().setFont(new Font("Courier", Font.BOLD, 15));
             panel.getSolutionField().setForeground(Color.red);
