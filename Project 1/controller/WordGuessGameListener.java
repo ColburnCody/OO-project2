@@ -16,6 +16,9 @@ public class WordGuessGameListener implements ActionListener{
 
     private WordGuessGame wordguess;
 
+    private char[] guesses;
+    private String guessText;
+
     public WordGuessGameListener(WordGuessPanel panel){
         this.panel = panel;
     }
@@ -29,11 +32,12 @@ public class WordGuessGameListener implements ActionListener{
             panel.setGameState(WordGuessPanel.GameState.PLAYING);
             String answer = wordguess.getSolution();
             int key = answer.length();
-            String guess = "";
+            guessText = "";
             for(int i = 0; i < key; i++){
-                guess += "_ ";
+                guessText += ". ";
             }
-            panel.getGuessField().setText(guess);
+            guesses = guessText.toCharArray();
+            panel.getGuessField().setText(guessText);
             panel.getSolutionField().setText(answer);
             panel.getSolutionField().setFont(new Font("Courier", Font.BOLD, 15));
             panel.getSolutionField().setForeground(Color.red);
@@ -44,8 +48,23 @@ public class WordGuessGameListener implements ActionListener{
             panel.getCanvas().repaint();
         } else{
             button.setEnabled(false);
-            String guess = button.getText();
+            char guess = button.getText().charAt(0);
             wordguess.setGuess(guess);
+            boolean correct = false;
+            for(int i = 0; i < wordguess.getSolution().length(); i++){
+                if(wordguess.getSolution().charAt(i) == wordguess.getGuess()){
+                    guesses[i] = wordguess.getGuess();
+                    guessText = String.valueOf(guesses);
+                    correct = true;
+                }
+                
+                if(correct){
+                    panel.getGuessField().setText(guessText);
+                } else{
+                    panel.getCanvas().setLives(wordguess.changeLife());
+                    panel.getCanvas().repaint();
+                }
+            }
             }
         
 

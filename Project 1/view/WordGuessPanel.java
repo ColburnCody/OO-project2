@@ -30,9 +30,9 @@ public class WordGuessPanel {
     private GameState gameState = GameState.READY;
 
 
-    String[] letters = {"a", "b", "c", "d", "e", "f", "g", "h",
-        "i", "j", "k", "l", "m", "n", "o", "p", "q",
-        "r", "s", "t", "u", "v", "w", "x", "y", "z"};
+    char[] letters = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
+        'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q',
+        'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
     private JButton[] guessButtons;
     private JButton newButton = new JButton("New");
 
@@ -61,7 +61,7 @@ public class WordGuessPanel {
         WordGuessGameListener listener = new WordGuessGameListener(this);
         guessButtons = new JButton[26];
         for(int i = 0; i < 26; i++){
-            guessButtons[i] = new JButton(letters[i]);
+            guessButtons[i] = new JButton("" + letters[i]);
             guessButtons[i].setEnabled(false);
             guessButtons[i].addActionListener(listener);
             letterGroup.add(guessButtons[i]);
