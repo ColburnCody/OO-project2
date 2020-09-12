@@ -16,8 +16,9 @@ public class WordGuessGameListener implements ActionListener{
 
     private WordGuessGame wordguess;
 
-    private char[] guesses;
-    private String guessText;
+    private char[] letters;
+    private String guess;
+    private int lives;
 
     public WordGuessGameListener(WordGuessPanel panel){
         this.panel = panel;
@@ -32,37 +33,50 @@ public class WordGuessGameListener implements ActionListener{
             panel.setGameState(WordGuessPanel.GameState.PLAYING);
             String answer = wordguess.getSolution();
             int key = answer.length();
-            guessText = "";
+            guess = "";
             for(int i = 0; i < key; i++){
-                guessText += ". ";
+                guess += '.';
             }
-            guesses = guessText.toCharArray();
-            panel.getGuessField().setText(guessText);
-            panel.getGuessField().setFont(new Font("Courier", Font.BOLD, 15));
+            letters = new char[key];
+            letters = guess.toCharArray();
+            panel.getGuessField().setText(guess);
+            panel.getGuessField().setFont(new Font("Courier", Font.BOLD, 20));
             panel.getSolutionField().setText(answer);
-            panel.getSolutionField().setFont(new Font("Courier", Font.BOLD, 15));
+            panel.getSolutionField().setFont(new Font("Courier", Font.BOLD, 20));
             panel.getSolutionField().setForeground(Color.red);
             for(var b: panel.getGuessButtons()){
                 b.setEnabled(true);
             }
-            panel.getCanvas().setLives(wordguess.getLives());
+            lives = wordguess.getLives();
+            panel.getCanvas().setLives(lives);
             panel.getCanvas().repaint();
         } else{
             button.setEnabled(false);
-            char guess = button.getText().charAt(0);
-            wordguess.setGuess(guess);
+            wordguess.setGuess(button.getText().charAt(0));
             boolean correct = false;
             for(int i = 0; i < wordguess.getSolution().length(); i++){
                 if(wordguess.getSolution().charAt(i) == wordguess.getGuess()){
-                    guesses[i] = wordguess.getGuess();
-                    guessText = String.valueOf(guesses);
+                    letters[i] = wordguess.getGuess();
                     correct = true;
+                }               
+            }
+            if(correct){
+                guess = String.valueOf(letters);
+                panel.getGuessField().setText(guess);
+                if(!guess.contains(".")){
+                    panel.setGameState(WordGuessPanel.GameState.GAMEOVER);
+                    panel.getCanvas().repaint();
                 }
-                
-                if(correct){
-                    panel.getGuessField().setText(guessText);
+            } else{
+                lives--;
+                panel.getCanvas().setLives(lives);
+                if(lives == 0){
+                    for(var b: panel.getGuessButtons()){
+                        b.setEnabled(false);
+                    }
+                    panel.setGameState(WordGuessPanel.GameState.GAMEOVER);
+                    panel.getCanvas().repaint();
                 } else{
-                    panel.getCanvas().setLives(wordguess.changeLife());
                     panel.getCanvas().repaint();
                 }
             }

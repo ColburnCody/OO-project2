@@ -14,6 +14,7 @@ public class WordGuessCanvas extends JPanel {
     public static int HEIGHT = 500;
 
     private int lives;
+    private String message;
 
     private WordGuessPanel panel;
 
@@ -31,21 +32,26 @@ public class WordGuessCanvas extends JPanel {
         if(state == WordGuessPanel.GameState.READY){
             g2.setColor(Color.blue);
             g2.setFont(new Font("Courier", Font.BOLD, 30));
-            g2.drawString("Press <New> to Start", 90, 150);
+            g2.drawString("Press <New> to Start", 90, 90);
         } else{
             if(state == WordGuessPanel.GameState.GAMEOVER){
                 g2.clearRect(0, 0, WIDTH, HEIGHT);
                 g2.setColor(Color.red);
                 g2.setFont(new Font("Courier", Font.BOLD, 30));
-                g2.drawString("YOU LOST ! ! !", 60, 150);
+                if(lives == 0){
+                    message = "YOU LOST ! ! !";
+                } else if(lives != 0){
+                    message = "YOU WON ! ! !";
+                }
+                g2.drawString(message, 90, 40);
                 g2.setColor(Color.blue);
                 g2.setFont(new Font("Courier", Font.BOLD, 30));
-                g2.drawString("Press <New> to Start", 90, 150);
+                g2.drawString("Press <New> to Start", 90, 90);
             } else{
                 g2.setColor(Color.blue);
                 g2.setFont(new Font("Courier", Font.BOLD, 60));
                 g2.drawString("Health Level", 20, 150);
-                for(int i = 0; i < 5; i++){
+                for(int i = 0; i < lives; i++){
                     g2.fillRect(i * 70 + 20, 190, 50, 50);
                 }
             }
