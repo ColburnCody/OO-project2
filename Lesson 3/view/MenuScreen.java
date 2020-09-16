@@ -29,6 +29,14 @@ public class MenuScreen {
         menuPanel.add(shapeButton);
 
         cp.add(BorderLayout.CENTER, menuPanel);
+
+        questionButton.addActionListener(event -> {
+            window.getContentPane().removeAll();
+            var panel = new QuestionPanel(window);
+            panel.init();
+            window.pack();
+            window.revalidate();
+        });
     }
     
 }
