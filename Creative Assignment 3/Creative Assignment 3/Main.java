@@ -1,6 +1,6 @@
 import javax.swing.JFrame;
 
-import view.MenuScreen;
+import view.MemoryPanel;
 
 public class Main{
     public static void main(String[] args){
@@ -8,8 +8,8 @@ public class Main{
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setLocation(400, 100);
 
-        var menu = new MenuScreen(window);
-        menu.init();
+        var memory = new MemoryPanel(window);
+        memory.init();
 
         window.pack();
         window.setVisible(true);
