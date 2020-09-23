@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 
 public class MemoryCanvas extends JPanel {
-
     private MemoryPanel panel;
 
     public MemoryCanvas(MemoryPanel panel){

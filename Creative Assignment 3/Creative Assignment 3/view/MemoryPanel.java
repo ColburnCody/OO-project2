@@ -12,10 +12,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
+import controller.MemoryButtonClickListener;
 import view.MemoryCanvas;
 
 public class MemoryPanel {
@@ -34,9 +34,6 @@ public class MemoryPanel {
     private JTextField highScoreDisplay = new JTextField();
     private JLabel scoreLabel = new JLabel("Current score");
     private JTextField scoreDisplay = new JTextField();
-
-    private int highScore = 0;
-    private int score = 0;
 
 
     private JButton newButton = new JButton("New game");
@@ -68,9 +65,9 @@ public class MemoryPanel {
         scorePanel.add(scoreLabel);
         scorePanel.add(scoreDisplay);
         highScoreDisplay.setEditable(false);
-        highScoreDisplay.setText(""+highScore);
+        highScoreDisplay.setText("0");
         scoreDisplay.setEditable(false);
-        scoreDisplay.setText(""+score);
+        scoreDisplay.setText("0");
         northPanel.add(highScorePanel);
         northPanel.add(scorePanel);
         cp.add(BorderLayout.NORTH, northPanel);
@@ -94,6 +91,57 @@ public class MemoryPanel {
         southPanel.add(buttonPanel);
         cp.add(BorderLayout.SOUTH, southPanel);
 
+        MemoryButtonClickListener l = new MemoryButtonClickListener(this);
+        easyButton.addActionListener(l);
+        mediumButton.addActionListener(l);
+        hardButton.addActionListener(l);
+        newButton.addActionListener(l);
+        clearButton.addActionListener(l);
+
+    }
+
+    public JFrame getWindow() {
+        return window;
+    }
+
+    public MemoryCanvas getCanvas() {
+        return canvas;
+    }
+
+    public JButton getNewButton() {
+        return newButton;
+    }
+
+    public JButton getClearButton() {
+        return clearButton;
+    }
+
+    public JRadioButton getEasyButton() {
+        return easyButton;
+    }
+
+    public GameState getGameState() {
+        return gameState;
+    }
+
+    public void setGameState(GameState state){
+        this.gameState = state;
+    }
+
+    public JRadioButton getHardButton() {
+        return hardButton;
+    }
+
+    public JRadioButton getMediumButton() {
+        return mediumButton;
+    }
+
+    public JTextField getHighScoreDisplay() {
+        return highScoreDisplay;
+    }
+
+    public JTextField getScoreDisplay() {
+        return scoreDisplay;
     }
     
 }
