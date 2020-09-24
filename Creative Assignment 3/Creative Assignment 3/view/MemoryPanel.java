@@ -2,7 +2,6 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
@@ -50,10 +49,10 @@ public class MemoryPanel {
     public void init(){
         Container cp = window.getContentPane();
 
-        JPanel leftPanel = new JPanel();
+        JPanel centerPanel = new JPanel();
         canvas = new MemoryCanvas(this);
-        leftPanel.add(canvas);
-        cp.add(BorderLayout.WEST, leftPanel);
+        centerPanel.add(canvas);
+        cp.add(BorderLayout.CENTER, centerPanel);
 
         JPanel northPanel = new JPanel();
         JPanel highScorePanel = new JPanel();

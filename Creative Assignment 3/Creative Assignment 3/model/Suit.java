@@ -1,16 +1,17 @@
 package model;
 
 import java.awt.Color;
+import java.awt.Graphics2D;
 
 public class Suit extends Card{
 
     private String val;
-    private Color color;
+    private Color suitColor;
     
-    public Suit(int x, int y, int width, int height, String val, Color color){
-        super(x, y, width, height);
+    public Suit(int x, int y, int width, int height, String val, Color suitColor, Color cardColor){
+        super(x, y, width, height, cardColor);
         this.val = val;
-        this.color = color;
+        this.suitColor = suitColor;
     }
 
     public String getVal() {
@@ -18,7 +19,13 @@ public class Suit extends Card{
     }
 
     public Color getColor() {
-        return color;
+        return suitColor;
+    }
+
+    @Override
+    public void render(Graphics2D g2){
+        g2.setColor(super.getCardColor());
+        g2.drawRect(super.getX(), super.getY(), super.getWidth(), super.getHeight());
     }
 
 

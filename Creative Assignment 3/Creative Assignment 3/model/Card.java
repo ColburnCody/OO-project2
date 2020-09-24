@@ -1,16 +1,22 @@
 package model;
 
-public class Card {
+import java.awt.Graphics2D;
+import java.awt.Color;
+
+public abstract class Card {
+
     private int x;
     private int y;
     private int width;
     private int height;
+    private Color cardColor;
 
-    public Card(int x, int y, int width, int height){
+    public Card(int x, int y, int width, int height, Color cardColor){
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        this.cardColor = cardColor;
     }
 
     public int getX() {
@@ -29,5 +35,10 @@ public class Card {
         return height;
     }
 
+    public Color getCardColor() {
+        return cardColor;
+    }
+    
+    public abstract void render(Graphics2D g2);
     
 }
