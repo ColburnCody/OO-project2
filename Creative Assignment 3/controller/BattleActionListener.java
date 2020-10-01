@@ -61,11 +61,13 @@ public class BattleActionListener implements ActionListener, MouseListener{
             panel.getDragonHealth().setText(""+panel.getDragon().getHealth());
             panel.getHeroHealth().setText(""+panel.getHero().getHealth());
             if(panel.getDragon().getHealth() <= 0){
+                panel.getDragonHealth().setText("0");
                 panel.setGameState(BattleSimulator.GameState.GAMEOVER);
                 panel.getFightButton().setEnabled(true);
                 panel.getRewardButton().setEnabled(true);
                 panel.getCanvas().repaint();
             }else if(panel.getHero().getHealth() <= 0){
+                panel.getHeroHealth().setText("0");
                 panel.setGameState(BattleSimulator.GameState.GAMEOVER);
                 panel.getFightButton().setEnabled(true);
                 panel.getCanvas().repaint();
