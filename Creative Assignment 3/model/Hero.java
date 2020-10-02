@@ -2,29 +2,17 @@ package model;
 
 import java.util.Random;
 
-import view.MenuScreen;
 
 public class Hero {
 
-    private int health;
+    protected int health;
     private int resetHealth;
-    private int attack;
+    protected int attack;
 
-    public Hero(){
-        String hero = MenuScreen.getHero();
-        if(hero == "warrior"){
-            health = 50;
-            resetHealth = 50;
-            attack = 25; 
-        } else if(hero == "wizard"){
-            health = 40;
-            resetHealth = 40;
-            attack = 35;
-        } else if(hero == "ranger"){
-            health = 45;
-            resetHealth = 45;
-            attack = 30;
-        }
+    public Hero(int health, int attack){
+        this.health = health;
+        this.resetHealth = health;
+        this.attack = attack;
     }
 
     public int getHealth(){

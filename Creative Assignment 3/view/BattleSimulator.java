@@ -14,6 +14,9 @@ import javax.swing.JTextField;
 import controller.BattleActionListener;
 import model.Dragon;
 import model.Hero;
+import model.Ranger;
+import model.Warrior;
+import model.Wizard;
 
 public class BattleSimulator {
 
@@ -26,7 +29,8 @@ public class BattleSimulator {
     private GameState gameState = GameState.READY;
 
     private JFrame window;
-    private Hero hero = new Hero();
+    private String setHero;
+    private Hero hero;
     private Dragon dragon = new Dragon();
     private JTextField dragonHealth = new JTextField();
     private JTextField heroHealth = new JTextField();
@@ -55,6 +59,15 @@ public class BattleSimulator {
 
         canvas = new BattleCanvas(this);
         cp.add(BorderLayout.CENTER, canvas);
+        
+        setHero = MenuScreen.getHero();
+        if(setHero == "warrior"){
+            hero = new Warrior(50, 25, 20);
+        }else if(setHero == "wizard"){
+            hero = new Wizard(40, 35);
+        }else if(setHero == "ranger"){
+            hero = new Ranger(45, 45);
+        }
 
         JPanel southPanel = new JPanel();
         JPanel buttonPanel = new JPanel();

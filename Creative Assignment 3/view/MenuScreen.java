@@ -60,19 +60,7 @@ public class MenuScreen {
         cp.add(BorderLayout.SOUTH, buttonPanel);
 
         fightButton.addActionListener(event -> {
-            if (warriorButton.isSelected()) {
-                window.getContentPane().removeAll();
-                var battle = new BattleSimulator(window);
-                battle.init();
-                window.pack();
-                window.revalidate();
-            } else if (wizardButton.isSelected()) {
-                window.getContentPane().removeAll();
-                var battle = new BattleSimulator(window);
-                battle.init();
-                window.pack();
-                window.revalidate();
-            } else if (rangerButton.isSelected()) {
+            if (warriorButton.isSelected() || wizardButton.isSelected() || rangerButton.isSelected()) {
                 window.getContentPane().removeAll();
                 var battle = new BattleSimulator(window);
                 battle.init();
