@@ -62,7 +62,7 @@ public class BattleSimulator {
         
         setHero = MenuScreen.getHero();
         if(setHero == "warrior"){
-            hero = new Warrior(50, 25, 20);
+            hero = new Warrior(50, 25, 15);
         }else if(setHero == "wizard"){
             hero = new Wizard(40, 35);
         }else if(setHero == "ranger"){
