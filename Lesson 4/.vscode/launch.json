@@ -6,6 +6,14 @@
     "configurations": [
         {
             "type": "java",
+            "name": "ISoundTest",
+            "request": "launch",
+            "vmArgs": "-ea",
+            "mainClass": "test.ISoundTest",
+            "projectName": "Lesson 4_f7873691"
+        },
+        {
+            "type": "java",
             "name": "AnimalTest",
             "request": "launch",
             "vmArgs": "-ea",

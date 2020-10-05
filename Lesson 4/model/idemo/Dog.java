@@ -17,5 +17,10 @@ public class Dog extends Animal{
     public String toString(){
         return "[Dog] " + super.toString() + " color = " + color;
     }
+
+    @Override
+    public String getSound() {
+        return "[Dog] woo ~~~~~~ fff";
+    }
     
 }
