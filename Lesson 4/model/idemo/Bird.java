@@ -1,10 +1,12 @@
 package model.idemo;
 
-public class Bird extends Animal{
+import java.awt.Graphics2D;
+
+public class Bird extends Animal {
 
     private int wingSpan;
 
-    public Bird(int x, int y, String name, int age, int wingSpan){
+    public Bird(int x, int y, String name, int age, int wingSpan) {
         super(x, y, name, age);
         this.wingSpan = wingSpan;
     }
@@ -14,13 +16,19 @@ public class Bird extends Animal{
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "[Bird] " + super.toString() + ", wingspan = " + wingSpan;
     }
 
     @Override
     public String getSound() {
         return "[Bird] chirrrrrrr r ~~~~~~ ing";
+    }
+
+    @Override
+    public void render(Graphics2D g2) {
+        g2.drawImage(getImage(), null, getX(), getY());
+
     }
     
 }
