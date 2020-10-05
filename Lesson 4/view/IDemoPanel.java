@@ -44,13 +44,21 @@ public class IDemoPanel {
 
         IDemoEventListener listener = new IDemoEventListener(this);
         canvas.addMouseListener(listener);
+        canvas.addKeyListener(listener);
+        canvas.requestFocusInWindow();
+        canvas.setFocusable(true);
+
+        // setFocusable config
+        quitButton.setFocusable(false);
+
+        quitButton.addActionListener(listener);
 
     }
 
     public IDemoCanvas getCanvas() {
         return canvas;
     }
-    
+
     private void populatePictures(){
         ArrayList<IRender> pics = canvas.getPictures();
         Car c1 = new Car(50, 50, "Ford", 9000, "SUV");
@@ -66,5 +74,13 @@ public class IDemoPanel {
         pics.add(v4);
         v4.setImage(ImageStore.dog);
 
+    }
+
+    public JButton getQuitButton() {
+        return quitButton;
+    }
+    
+    public JFrame getWindow() {
+        return window;
     }
 }

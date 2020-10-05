@@ -56,6 +56,11 @@ public class Vehicle implements ISound, IRender {
     public Rectangle getBoundingBox(){
         return new Rectangle(x, y, image.getWidth(), image.getHeight());
     }
+    @Override
+    public void translate(int dx, int dy){
+        x += dx;
+        y += dy;
+    }
 
     @Override
     public void render(Graphics2D g2) {

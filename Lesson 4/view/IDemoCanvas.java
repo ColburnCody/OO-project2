@@ -45,5 +45,13 @@ public class IDemoCanvas extends JPanel {
     public ArrayList<IRender> getPictures() {
         return pictures;
     }
+
+    public int getSelectedIndex() {
+        return selectedIndex;
+    }
+
+    public void setSelectedIndex(int selectedIndex) {
+        this.selectedIndex = selectedIndex;
+    }
     
 }
