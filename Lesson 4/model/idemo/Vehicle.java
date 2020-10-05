@@ -2,6 +2,7 @@ package model.idemo;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.awt.Rectangle;
 
 public class Vehicle implements ISound, IRender {
 
@@ -51,9 +52,15 @@ public class Vehicle implements ISound, IRender {
     public String getSound() {
         return null;
     }
+    @Override
+    public Rectangle getBoundingBox(){
+        return new Rectangle(x, y, image.getWidth(), image.getHeight());
+    }
 
     @Override
     public void render(Graphics2D g2) {
+        // TODO Auto-generated method stub
 
     }
+
 }

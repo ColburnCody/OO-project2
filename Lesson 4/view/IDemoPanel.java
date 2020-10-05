@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import controller.IDemoEventListener;
 import model.idemo.Airplane;
 import model.idemo.Bird;
 import model.idemo.Car;
@@ -41,8 +42,15 @@ public class IDemoPanel {
 
         populatePictures();
 
+        IDemoEventListener listener = new IDemoEventListener(this);
+        canvas.addMouseListener(listener);
+
     }
 
+    public IDemoCanvas getCanvas() {
+        return canvas;
+    }
+    
     private void populatePictures(){
         ArrayList<IRender> pics = canvas.getPictures();
         Car c1 = new Car(50, 50, "Ford", 9000, "SUV");

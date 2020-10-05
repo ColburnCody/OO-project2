@@ -1,6 +1,7 @@
 package model.idemo;
 
 import java.awt.Graphics2D;
+import java.awt.Color;
 
 public class Dog extends Animal {
 
@@ -28,7 +29,8 @@ public class Dog extends Animal {
     @Override
     public void render(Graphics2D g2) {
         g2.drawImage(getImage(), null, getX(), getY());
-
+        g2.setColor(Color.yellow);
+        g2.drawString("color="+color, getX(), getY());
     }
     
 }
