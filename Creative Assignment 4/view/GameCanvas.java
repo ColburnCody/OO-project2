@@ -5,18 +5,20 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
-import java.util.Random;
 
 import javax.swing.JPanel;
 
+import model.Goal;
 import model.IShapeDraw;
 import model.Player;
+
 
 public class GameCanvas extends JPanel {
 
     private GamePanel panel;
     private ArrayList<IShapeDraw> obstacles = new ArrayList<>();
     private Player player;
+    private Goal goal;
 
     public GameCanvas(GamePanel panel){
         this.panel = panel;
@@ -28,13 +30,12 @@ public class GameCanvas extends JPanel {
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        Random r = new Random();
-        int x = r.nextInt(20);
-        int y = r.nextInt(20);
-        player = new Player(x, y);
-        player.render(g2);
-        for(int i = 0; i < obstacles.size(); i++){
-            obstacles.get(i).render(g2);
+            player = new Player(20, 20);
+            goal = new Goal(450, 450);
+            player.render(g2);
+            goal.render(g2);
+            for(var o: obstacles){
+                o.render(g2);
         }
     }
     
@@ -44,5 +45,9 @@ public class GameCanvas extends JPanel {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public Goal getGoal() {
+        return goal;
     }
 }

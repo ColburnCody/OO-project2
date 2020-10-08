@@ -3,7 +3,6 @@ package controller;
 import java.awt.event.KeyListener;
 import java.util.Random;
 
-import model.Goal;
 import model.IShapeDraw;
 import model.Obstacle;
 import view.GamePanel;
@@ -15,6 +14,12 @@ import java.awt.event.KeyEvent;
 public class GameListener implements ActionListener, KeyListener {
 
     private GamePanel panel;
+
+    private int x;
+    private int y;
+    private int w;
+    private int h;
+    private Random r;
 
 
 
@@ -31,44 +36,45 @@ public class GameListener implements ActionListener, KeyListener {
             panel.getCanvas().getObstacles().clear(); 
             if(panel.getSecretButton().isSelected()){
                 for(int i = 0; i < 30; i++){
-                    Random r = new Random();
-                    int x = r.nextInt(500);
-                    int y = r.nextInt(500);
-                    int w = r.nextInt(30) + 10;
-                    int h = r.nextInt(30) + 10;
+                    r = new Random();
+                    x = r.nextInt(500);
+                    y = r.nextInt(500);
+                    w = r.nextInt(30) + 10;
+                    h = r.nextInt(30) + 10;
                     IShapeDraw obstacle = new Obstacle(x, y, h, w);
                     panel.getCanvas().getObstacles().add(obstacle);
                 }
-
             }else{
                 for(int i = 0; i < 15; i++){
-                    Random r = new Random();
-                    int x = r.nextInt(500);
-                    int y = r.nextInt(500);
-                    int w = r.nextInt(30) + 10;
-                    int h = r.nextInt(30) + 10;
+                    r = new Random();
+                    x = r.nextInt(500);
+                    y = r.nextInt(500);
+                    w = r.nextInt(30) + 10;
+                    h = r.nextInt(30) + 10;
                     IShapeDraw obstacle = new Obstacle(x, y, h, w);
                     panel.getCanvas().getObstacles().add(obstacle);
                 }
+            }
+            panel.getCanvas().repaint();
         }
-        panel.getCanvas().repaint();
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
         var key = e.getKeyCode();
+        IShapeDraw p = panel.getCanvas().getPlayer();
         switch(key){
             case KeyEvent.VK_LEFT:
-                panel.getCanvas().getPlayer().translate(-UNIT_MOVE, 0);
+                p.translate(-UNIT_MOVE, 0);
                 break;
             case KeyEvent.VK_RIGHT:
-                panel.getCanvas().getPlayer().translate(UNIT_MOVE, 0);
+                p.translate(UNIT_MOVE, 0);
                 break;
             case KeyEvent.VK_UP:
-                panel.getCanvas().getPlayer().translate(0, -UNIT_MOVE);
+                p.translate(0, -UNIT_MOVE);
                 break;
             case KeyEvent.VK_DOWN:
-                panel.getCanvas().getPlayer().translate(0, UNIT_MOVE);
+                p.translate(0, UNIT_MOVE);
         }
         panel.getCanvas().repaint();
 

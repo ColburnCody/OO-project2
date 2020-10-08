@@ -14,5 +14,11 @@ public class Goal extends Shape {
         g2.setColor(Color.yellow);
         g2.fillRect(getX(), getY(), 10, 10);
     }
+
+    @Override
+    public void translate(int dx, int dy) {
+        // TODO Auto-generated method stub
+
+    }
     
 }

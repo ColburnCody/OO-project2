@@ -19,6 +19,12 @@ public class Obstacle extends Shape {
         g2.setColor(Color.red);
         g2.fillRect(getX(), getY(), height, width);
     }
+
+    @Override
+    public void translate(int dx, int dy) {
+        // TODO Auto-generated method stub
+
+    }
     
     
 }

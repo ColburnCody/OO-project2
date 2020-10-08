@@ -16,13 +16,7 @@ public abstract class Shape implements IShapeDraw  {
 
     public int getY() {
         return y;
-    }
-
-    @Override
-    public void translate(int dx, int dy){
-        x += dx;
-        y += dy;
-    }    
+    }   
 
     public void setLocation(int x, int y){
         this.x = x;

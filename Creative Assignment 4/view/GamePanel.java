@@ -15,6 +15,7 @@ public class GamePanel {
 
     private JFrame window;
 
+
     private GameCanvas canvas;
     private JButton newButton = new JButton("New Game");
     private JCheckBox secretButton = new JCheckBox("Secret mode");
