@@ -1,6 +1,6 @@
 import javax.swing.JFrame;
 
-import view.MenuScreen;
+import view.GamePanel;
 
 public class Main {
 
@@ -8,12 +8,11 @@ public class Main {
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setLocation(400, 100);
-
-        var menu = new MenuScreen(window);
-        menu.init();
-
+        var panel = new GamePanel(window);
+        panel.init();
         window.pack();
         window.setVisible(true);
+        
     }
     
 }

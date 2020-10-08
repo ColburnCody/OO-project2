@@ -1,19 +1,15 @@
-package model.shapes;
+package model;
 
-public abstract class Shape {
+public abstract class Shape implements IShapeDraw  {
 
     private int x;
     private int y;
-
-    public Shape(){
-        this(0, 0);
-    }
 
     public Shape(int x, int y){
         this.x = x;
         this.y = y;
     }
-    
+
     public int getX() {
         return x;
     }
@@ -22,8 +18,15 @@ public abstract class Shape {
         return y;
     }
 
+    @Override
+    public void translate(int dx, int dy){
+        x += dx;
+        y += dy;
+    }    
+
     public void setLocation(int x, int y){
         this.x = x;
         this.y = y;
     }
+    
 }
