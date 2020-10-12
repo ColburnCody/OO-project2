@@ -25,7 +25,7 @@ public class MenuScreen {
     private static JRadioButton warriorButton = new JRadioButton("Play a warrior");
     private static JRadioButton wizardButton = new JRadioButton("Play a wizard");
     private static JRadioButton rangerButton = new JRadioButton("Play a ranger");
-    private JCheckBox secretButton = new JCheckBox("This button is a secret");
+    private static JCheckBox secretButton = new JCheckBox("This button is a secret");
     private JButton runButton = new JButton("Bravely retreat");
     private JButton fightButton = new JButton("Beat up a tiny dragon");
 

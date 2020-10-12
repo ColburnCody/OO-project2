@@ -94,8 +94,8 @@ public class BattleCanvas extends JPanel{
             g2.drawLine(361, 79, 321, 131);
             g2.drawLine(321, 131, 391, 110);
             g2.setColor(Color.yellow);
-            g2.setFont(new Font("Courier", Font.BOLD, 30));
-            g2.drawString("Click to battle the dragon!", 103, 422);
+            g2.setFont(new Font("Courier", Font.BOLD, 15));
+            g2.drawString("Click spacebar to battle the dragon!", 103, 422);
             
             
         }

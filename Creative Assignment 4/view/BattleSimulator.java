@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.GridLayout;
 
-import javax.print.StreamPrintServiceFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -79,7 +78,12 @@ public class BattleSimulator {
         cp.add(BorderLayout.SOUTH, buttonPanel);
 
         BattleActionListener listener = new BattleActionListener(this);
-        canvas.addMouseListener(listener);
+        canvas.addKeyListener(listener);
+        canvas.requestFocusInWindow();
+        canvas.setFocusable(true);
+        rewardButton.setFocusable(false);
+        exitButton.setFocusable(false);
+        fightButton.setFocusable(false);
         rewardButton.addActionListener(listener);
         exitButton.addActionListener(listener);
         fightButton.addActionListener(listener);
