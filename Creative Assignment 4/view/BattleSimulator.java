@@ -60,12 +60,13 @@ public class BattleSimulator {
         cp.add(BorderLayout.CENTER, canvas);
         
         setHero = MenuScreen.getHero();
+        boolean deprived = MenuScreen.getSecretButton().isSelected();
         if(setHero == "warrior"){
-            hero = new Warrior(50, 25, 15);
+            hero = new Warrior(50, 25, 15, deprived);
         }else if(setHero == "wizard"){
-            hero = new Wizard(40, 35);
+            hero = new Wizard(40, 35, deprived);
         }else if(setHero == "ranger"){
-            hero = new Ranger(45, 45);
+            hero = new Ranger(45, 45, deprived);
         }
 
         JPanel southPanel = new JPanel();

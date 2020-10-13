@@ -52,13 +52,6 @@ public class BattleActionListener implements ActionListener, KeyListener {
 
     }
 
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-        // TODO Auto-generated method stub
-
-    }
-
     @Override
     public void keyPressed(KeyEvent e) {
         var key = e.getKeyCode();
@@ -84,11 +77,15 @@ public class BattleActionListener implements ActionListener, KeyListener {
         }
     }
 
+    @Override
+    public void keyTyped(KeyEvent e) {
+      
+    }
 
 
     @Override
     public void keyReleased(KeyEvent e) {
-        // TODO Auto-generated method stub
+    
 
     }
 
