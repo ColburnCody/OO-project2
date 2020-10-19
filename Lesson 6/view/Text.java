@@ -2,6 +2,7 @@ package view;
 
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.Color;
 
 import model.GameElement;
 
@@ -12,6 +13,7 @@ public class Text extends GameElement {
     public Text(String message, int x, int y){
         super(x, y);
         this.message = message;
+        super.color = Color.yellow;
     }
 
     @Override

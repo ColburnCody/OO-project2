@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Container;
+import java.util.Random;
 import java.awt.BorderLayout;
 import java.awt.Color;
 
@@ -11,8 +12,11 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import controller.ButtonClickListener;
+import controller.KeyController;
 import controller.TimerListener;
+import model.Food;
 import model.Snake;
+import model.observerPattern.SnakeObserver;
 
 public class GameBoard {
 
@@ -34,7 +38,10 @@ public class GameBoard {
 
     private Timer timer;
 
+    private boolean gameOver;
+
     private JLabel scoreDisplay = new JLabel();
+    private int score = 0;
 
     public GameBoard(JFrame window){
         this.window = window;
@@ -48,6 +55,7 @@ public class GameBoard {
         JPanel northPanel = new JPanel();
         JLabel label = new JLabel("Score: ");
         northPanel.add(label);
+        scoreDisplay.setText("" + score);
         northPanel.add(scoreDisplay);
         cp.add(BorderLayout.NORTH, northPanel);
 
@@ -63,10 +71,44 @@ public class GameBoard {
 
         ButtonClickListener buttonListener = new ButtonClickListener(this);
         startButton.addActionListener(buttonListener);
+        stopButton.addActionListener(buttonListener);
+        exitButton.addActionListener(buttonListener);
+
+        KeyController keyController = new KeyController(this);
+        canvas.addKeyListener(keyController);
+        canvas.requestFocusInWindow();
+        canvas.setFocusable(true);
+
+        // disable focusable in all other components
+        startButton.setFocusable(false);
+        stopButton.setFocusable(false);
+        // general safety measures
+        exitButton.setFocusable(false);
+        label.setFocusable(false); 
+        scoreDisplay.setFocusable(false);
+
+        SnakeObserver observer = new SnakeObserver(this);
+        snake.addSnakeListener(observer);
 
         timer = new Timer(DELAY, new TimerListener(this));
         timer.start();
     
+    }
+
+    public void createFood(){
+        Random random = new Random();
+        int xloc, yloc;
+        do{
+            xloc = random.nextInt(GameBoard.WIDTH / GameBoard.CELL_SIZE) * GameBoard.CELL_SIZE;
+            yloc = random.nextInt(GameBoard.HEIGHT / GameBoard.CELL_SIZE) * GameBoard.CELL_SIZE;
+        }while(xloc == snake.x && yloc == snake.y);
+
+        Food food = new Food(xloc, yloc, Color.pink);
+        canvas.getFigures().add(food);
+    }
+
+    public Timer getTimer() {
+        return timer;
     }
 
     public MyCanvas getCanvas() {
@@ -87,5 +129,25 @@ public class GameBoard {
 
     public JButton getExitButton() {
         return exitButton;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public JLabel getScoreDisplay() {
+        return scoreDisplay;
+    }
+
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
     }
 }
