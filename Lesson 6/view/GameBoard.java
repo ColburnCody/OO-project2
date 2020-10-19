@@ -2,16 +2,22 @@ package view;
 
 import java.awt.Container;
 import java.awt.BorderLayout;
+import java.awt.Color;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.Timer;
+
+import controller.TimerListener;
 
 public class GameBoard {
 
     public static final int WIDTH = 600;
     public static final int HEIGHT = 400;
+    public static final int FPS = 4;
+    public static final int DELAY = 1000 / FPS; // milliseconds
 
     private JFrame window;
 
@@ -20,6 +26,8 @@ public class GameBoard {
     private JButton startButton = new JButton("Start");
     private JButton stopButton = new JButton("Stop");
     private JButton exitButton = new JButton("Exit");
+
+    private Timer timer;
 
     private JLabel scoreDisplay = new JLabel();
 
@@ -43,6 +51,17 @@ public class GameBoard {
         southPanel.add(stopButton);
         southPanel.add(exitButton);
         cp.add(BorderLayout.SOUTH, southPanel);
+
+        Text t1 = new Text("Click <Start> to Play", 100, 100);
+        t1.color = Color.yellow;
+        canvas.getFigures().add(t1);
+
+        timer = new Timer(DELAY, new TimerListener(this));
+        timer.start();
     
+    }
+
+    public MyCanvas getCanvas() {
+        return canvas;
     }
 }
