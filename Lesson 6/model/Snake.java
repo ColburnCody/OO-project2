@@ -99,6 +99,9 @@ public class Snake extends GameElement implements Subject {
                 }
                 break;
             case AtePoison:
+                for(var o: observers){
+                    o.snakeAtePoison();
+                }
                 break;
             case LeftScene:
                 for(var o: observers){

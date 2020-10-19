@@ -24,8 +24,6 @@ public class SnakeObserver implements Observer{
 
     @Override
     public void snakeAtePoison() {
-        
-
     }
 
     @Override
