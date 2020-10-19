@@ -10,7 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import controller.ButtonClickListener;
 import controller.TimerListener;
+import model.Snake;
 
 public class GameBoard {
 
@@ -18,10 +20,13 @@ public class GameBoard {
     public static final int HEIGHT = 400;
     public static final int FPS = 4;
     public static final int DELAY = 1000 / FPS; // milliseconds
+    public static final int CELL_SIZE = 20;
 
     private JFrame window;
 
     private MyCanvas canvas;
+
+    private Snake snake = new Snake();
 
     private JButton startButton = new JButton("Start");
     private JButton stopButton = new JButton("Stop");
@@ -56,6 +61,9 @@ public class GameBoard {
         t1.color = Color.yellow;
         canvas.getFigures().add(t1);
 
+        ButtonClickListener buttonListener = new ButtonClickListener(this);
+        startButton.addActionListener(buttonListener);
+
         timer = new Timer(DELAY, new TimerListener(this));
         timer.start();
     
@@ -63,5 +71,21 @@ public class GameBoard {
 
     public MyCanvas getCanvas() {
         return canvas;
+    }
+
+    public Snake getSnake() {
+        return snake;
+    }
+
+    public JButton getStartButton() {
+        return startButton;
+    }
+
+    public JButton getStopButton() {
+        return stopButton;
+    }
+
+    public JButton getExitButton() {
+        return exitButton;
     }
 }

@@ -23,8 +23,7 @@ public class Text extends GameElement {
 
     @Override
     public void move() {
-        ++x;
-        ++y;
+
     }
     
 }
