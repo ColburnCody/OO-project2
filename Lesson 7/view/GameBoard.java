@@ -58,7 +58,7 @@ public class GameBoard {
         timer = new Timer(DELAY, timerListener);
 
         startButton.addActionListener(event -> {
-            shooter = new Shooter(GameBoard.WIDTH / 2, GameBoard.HEIGHT - 2 * ShooterElement.SIZE);
+            shooter = new Shooter(GameBoard.WIDTH / 2, GameBoard.HEIGHT - ShooterElement.SIZE);
             canvas.getGameElements().clear();
             canvas.getGameElements().add(shooter);
             timer.start();
@@ -66,6 +66,10 @@ public class GameBoard {
 
     }
 
+    public Shooter getShooter() {
+        return shooter;
+    }
+    
     public MyCanvas getCanvas() {
         return canvas;
     }
