@@ -68,6 +68,8 @@ public class GameBoard {
             timer.start();
         });
 
+        quitButton.addActionListener(event -> System.exit(0));
+
     }
 
     public EnemyComposite getEnemyComposite() {
