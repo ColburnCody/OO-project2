@@ -4,15 +4,24 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
-public class Shooter extends GameElement {
+import model.Observer.Observer;
+import model.Observer.Subject;
+
+public class Shooter extends GameElement implements Subject {
 
     public static final int UNIT_MOVE = 10;
     public static final int MAX_BULLETS = 3;
 
+    private ArrayList<Observer> observers = new ArrayList<>();
+
+    public enum Event {
+        HitEnemy, BombHit
+    }
+
     private ArrayList<GameElement> components = new ArrayList<>();
     private ArrayList<GameElement> weapons = new ArrayList<>();
 
-    public Shooter(int x, int y){
+    public Shooter(int x, int y) {
         super(x, y, 0, 0);
 
         var size = ShooterElement.SIZE;
@@ -26,28 +35,29 @@ public class Shooter extends GameElement {
         components.add(s4);
     }
 
-    public void moveRight(){
+    public void moveRight() {
         super.x += UNIT_MOVE;
-        for(var c: components){
+        for (var c : components) {
             c.x += UNIT_MOVE;
         }
     }
 
-    public void moveLeft(){
+    public void moveLeft() {
         super.x -= UNIT_MOVE;
-        for(var c: components){
+        for (var c : components) {
             c.x -= UNIT_MOVE;
         }
     }
 
-    public boolean canFireMoreBullet(){
+    public boolean canFireMoreBullet() {
         return weapons.size() < MAX_BULLETS;
     }
 
-    public void removeBulletsOutOfBounds(){
+    public void removeBulletsOutOfBounds() {
         var remove = new ArrayList<GameElement>();
-        for(var w: weapons){
-            if(w.y < 0) remove.add(w);
+        for (var w : weapons) {
+            if (w.y < 0)
+                remove.add(w);
         }
         weapons.removeAll(remove);
     }
@@ -56,22 +66,50 @@ public class Shooter extends GameElement {
         return weapons;
     }
 
-
     @Override
     public void render(Graphics2D g2) {
-        for(var c: components){
+        for (var c : components) {
             c.render(g2);
         }
-        for(var w: weapons){
+        for (var w : weapons) {
             w.render(g2);
         }
     }
 
     @Override
     public void animate() {
-       for(var w: weapons){
-           w.animate();
-       }
+        for (var w : weapons) {
+            w.animate();
+        }
+    }
+
+    @Override
+    public void addShooterListener(Observer o) {
+        observers.add(o);
+
+    }
+
+    @Override
+    public void removeShooterListener(Observer o) {
+        observers.remove(o);
+
+    }
+
+    @Override
+    public void notifyObservers(Event event) {
+        switch(event){
+            case HitEnemy:
+                for(var o: observers){
+                    o.shooterHitEnemy();
+                }
+                break;
+            case BombHit:
+                    for(var o: observers){
+                        o.enemyHitShooter();
+                    }
+                    break;
+        }
+
     }
     
 }

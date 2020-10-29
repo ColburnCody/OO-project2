@@ -6,6 +6,7 @@ import java.awt.Color;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -28,6 +29,9 @@ public class GameBoard {
     private EnemyComposite enemyComposite;
     private Timer timer;
     private TimerListener timerListener;
+    private JLabel scoreDisplay = new JLabel();
+    private int score = 0;
+    private boolean gameOver;
 
     public GameBoard(JFrame window){
         this.window = window;
@@ -50,6 +54,11 @@ public class GameBoard {
         quitButton.setFocusable(false);
 
         JPanel southPanel = new JPanel();
+        scoreDisplay.setText("text");
+        JLabel label = new JLabel("Score: ");
+        southPanel.add(label);
+        scoreDisplay.setText("" + score);
+        southPanel.add(scoreDisplay);
         southPanel.add(startButton);
         southPanel.add(quitButton);
         cp.add(BorderLayout.SOUTH, southPanel);
@@ -65,6 +74,7 @@ public class GameBoard {
             canvas.getGameElements().clear();
             canvas.getGameElements().add(shooter);
             canvas.getGameElements().add(enemyComposite);
+            setGameOver(false);
             timer.start();
         });
 
@@ -91,5 +101,26 @@ public class GameBoard {
     public TimerListener getTimerListener() {
         return timerListener;
     }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public JLabel getScoreDisplay() {
+        return scoreDisplay;
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
+    }
+
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
+    }
+    
 
 }

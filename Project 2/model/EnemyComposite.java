@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Random;
 
+import model.Shooter.Event;
 import view.GameBoard;
 
 import java.awt.Color;
@@ -56,12 +57,22 @@ public class EnemyComposite extends GameElement {
         if(movingToRight){
             if(rightEnd() >= GameBoard.WIDTH){
                 dx = -dx;
+                for(var row: rows){
+                    for(var e: row){
+                        e.y += ENEMY_SIZE;
+                    }
+                }
                 movingToRight = false;
             }
         }else{
             dx = -dx;
             if(leftEnd() <= 0){
                 dx += dx;
+                for(var row: rows){
+                    for(var e: row){
+                        e.y += ENEMY_SIZE;
+                    }
+                }
                 movingToRight = true;
             }
         }
@@ -128,6 +139,7 @@ public class EnemyComposite extends GameElement {
             for(var enemy: row){
                 for(var bullet: shooter.getWeapons()){
                     if(enemy.collideWith(bullet)){
+                        shooter.notifyObservers(Event.HitEnemy);
                         removeBullets.add(bullet);
                         removeEnemies.add(enemy);
                     }
@@ -151,6 +163,4 @@ public class EnemyComposite extends GameElement {
         shooter.getWeapons().removeAll(removeBullets);
         bombs.removeAll(removeBombs);
     }
-
-
 }
