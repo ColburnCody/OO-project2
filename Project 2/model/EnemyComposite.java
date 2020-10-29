@@ -5,11 +5,12 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import model.Shooter.Event;
+import model.strategyPattern.EnemyMovement;
 import view.GameBoard;
 
 import java.awt.Color;
 
-public class EnemyComposite extends GameElement {
+public class EnemyComposite extends GameElement{
 
     public static final int NROWS = 2;
     public static final int NCOLS = 10;
@@ -20,6 +21,7 @@ public class EnemyComposite extends GameElement {
     private ArrayList<GameElement> bombs;
     private boolean movingToRight = true;
     private Random random = new Random();
+    private EnemyMovement movement;
 
     public EnemyComposite(){
         rows = new ArrayList<>();
@@ -32,9 +34,32 @@ public class EnemyComposite extends GameElement {
                 oneRow.add(new Enemy(c * ENEMY_SIZE * 2, r * ENEMY_SIZE * 2, ENEMY_SIZE, Color.yellow, true));
             }
         }
+        movement = new EnemyMovement(this);
     }
 
+    public ArrayList<ArrayList<GameElement>> getRows() {
+        return rows;
+    }
 
+    public static int getEnemySize() {
+        return ENEMY_SIZE;
+    }
+
+    public EnemyMovement getMovement() {
+        return movement;
+    }
+
+    public boolean compositeAtBottom(){
+        boolean isAtBottom = false;
+        for(var row: rows){
+            for(var e: row){
+                while(!isAtBottom){
+                    isAtBottom = movement.atBottom();
+                }
+            }
+        }
+        return isAtBottom;
+    }
 
     @Override
     public void render(Graphics2D g2) {
@@ -55,7 +80,7 @@ public class EnemyComposite extends GameElement {
     public void animate() {
         int dx = UNIT_MOVE;
         if(movingToRight){
-            if(rightEnd() >= GameBoard.WIDTH){
+            if(movement.rightEnd() >= GameBoard.WIDTH){
                 dx = -dx;
                 for(var row: rows){
                     for(var e: row){
@@ -66,7 +91,7 @@ public class EnemyComposite extends GameElement {
             }
         }else{
             dx = -dx;
-            if(leftEnd() <= 0){
+            if(movement.leftEnd() <= 0){
                 dx += dx;
                 for(var row: rows){
                     for(var e: row){
@@ -92,26 +117,6 @@ public class EnemyComposite extends GameElement {
 
     public ArrayList<GameElement> getBombs() {
         return bombs;
-    }
-    
-    private int rightEnd(){
-        int xEnd = -100;
-        for(var row: rows){
-            if(row.size() == 0) continue;
-            int x = row.get(row.size() - 1).x + ENEMY_SIZE;
-            if(x > xEnd) xEnd = x;
-        }
-        return xEnd;
-    }
-
-    private int leftEnd(){
-        int xEnd = 9000;
-        for(var row: rows){
-            if(row.size() == 0) continue;
-            int x = row.get(0).x;
-            if(x < xEnd) xEnd = x;
-        }
-        return xEnd;
     }
 
     public void dropBombs(){
@@ -165,6 +170,21 @@ public class EnemyComposite extends GameElement {
             }
         }
         shooter.getWeapons().removeAll(removeBullets);
+        bombs.removeAll(removeBombs);
+
+        // bombs vs shooter
+        removeBullets.clear();
+        var removeComponents = new ArrayList<GameElement>();
+        for(var b: bombs){
+            for(var c: shooter.getComponents()){
+                if(c.collideWith(b)){
+                    shooter.notifyObservers(Event.BombHit);
+                    removeBombs.add(b);
+                    removeComponents.add(c);
+                }
+            }
+        }
+        shooter.getComponents().removeAll(removeComponents);
         bombs.removeAll(removeBombs);
     }
 }

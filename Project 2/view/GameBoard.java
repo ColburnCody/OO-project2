@@ -32,7 +32,7 @@ public class GameBoard {
     private TimerListener timerListener;
     private JLabel scoreDisplay = new JLabel();
     private int score = 0;
-    private boolean gameOver;
+    private boolean gameOver = true;
 
     public GameBoard(JFrame window){
         this.window = window;
@@ -70,6 +70,7 @@ public class GameBoard {
         timer = new Timer(DELAY, timerListener);
 
         startButton.addActionListener(event -> {
+            setGameOver(false);
             shooter = new Shooter(GameBoard.WIDTH / 2, GameBoard.HEIGHT - ShooterElement.SIZE);
             ShooterObserver observer = new ShooterObserver(this);
             shooter.addShooterListener(observer);
@@ -77,12 +78,17 @@ public class GameBoard {
             canvas.getGameElements().clear();
             canvas.getGameElements().add(shooter);
             canvas.getGameElements().add(enemyComposite);
-            setGameOver(false);
+            score = 0;
+            scoreDisplay.setText("" + score);
             timer.start();
         });
 
         quitButton.addActionListener(event -> System.exit(0));
 
+    }
+
+    public JFrame getWindow() {
+        return window;
     }
 
     public EnemyComposite getEnemyComposite() {

@@ -2,14 +2,15 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+
+import java.awt.Color;
+
 import java.util.LinkedList;
 
-import model.Bomb;
 import model.Bullet;
-import model.GameElement;
 import model.Shooter;
 import view.GameBoard;
+import view.TextDraw;
 
 public class TimerListener implements ActionListener {
 
@@ -29,11 +30,13 @@ public class TimerListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        ++frameCounter;
-        update();
-        processEventQueue();
-        processCollision();
-        gameBoard.getCanvas().repaint();
+        if(!gameBoard.isGameOver()){
+            ++frameCounter;
+            update();
+            processEventQueue();
+            processCollision();
+            gameBoard.getCanvas().repaint();
+        }
     }
 
     private void processEventQueue(){
@@ -66,16 +69,14 @@ public class TimerListener implements ActionListener {
     private void processCollision(){
         var shooter = gameBoard.getShooter();
         var enemyComposite = gameBoard.getEnemyComposite();
-        var bombs = new ArrayList<GameElement>();
-        bombs = enemyComposite.getBombs();
 
         shooter.removeBulletsOutOfBounds();
         enemyComposite.removeBombsOutOfBounds();
         enemyComposite.processCollision(shooter);
-        for(var b: bombs){
-            shooter.processCollision(b);
+        if(enemyComposite.compositeAtBottom()){
+            gameBoard.setGameOver(true);
+            gameBoard.getCanvas().getGameElements().add(new TextDraw("You lost! Score: " + gameBoard.getScore(), 100, 100, Color.red, 30));
         }
-
     }
 
     private void update(){

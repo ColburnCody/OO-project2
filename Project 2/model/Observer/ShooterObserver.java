@@ -1,11 +1,16 @@
 package model.Observer;
 
-import model.Shooter;
+
+import java.awt.Color;
+
 import view.GameBoard;
+import view.TextDraw;
 
 public class ShooterObserver implements Observer {
 
     private GameBoard gameBoard;
+    private int enemyCount = 20;
+    private int hitCount = 4;
 
     public ShooterObserver(GameBoard gameBoard){
         this.gameBoard = gameBoard;
@@ -16,14 +21,23 @@ public class ShooterObserver implements Observer {
     public void shooterHitEnemy() {
         int score = gameBoard.getScore();
         score += 10;
+        enemyCount--;
         gameBoard.setScore(score);
         gameBoard.getScoreDisplay().setText("" + score);
+        if(enemyCount == 0){
+            gameBoard.setGameOver(true);
+            gameBoard.getCanvas().getGameElements().add(new TextDraw("You win! Score: " + score, 100, 100, Color.yellow, 30));
+        }
     }
 
     @Override
     public void enemyHitShooter() {
-        Shooter shooter = gameBoard.getShooter();
-
+        --hitCount;
+        if(hitCount == 0){
+            gameBoard.setGameOver(true);
+            int score = gameBoard.getScore();
+            gameBoard.getCanvas().getGameElements().add(new TextDraw("You lost! Score: " + score, 100, 100, Color.red, 30));
+        }
     }
     
 }
