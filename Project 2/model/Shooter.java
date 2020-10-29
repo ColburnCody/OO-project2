@@ -66,6 +66,21 @@ public class Shooter extends GameElement implements Subject {
         return weapons;
     }
 
+    public ArrayList<GameElement> getComponents() {
+        return components;
+    }
+
+    public void processCollision(GameElement gameElement){
+        var removeComponents = new ArrayList<GameElement>();
+        for(var c: components){
+            if(c.collideWith(gameElement)){
+                notifyObservers(Event.BombHit);
+                removeComponents.add(c);
+            }
+            components.removeAll(removeComponents);
+        }
+    }
+
     @Override
     public void render(Graphics2D g2) {
         for (var c : components) {

@@ -89,6 +89,10 @@ public class EnemyComposite extends GameElement {
             b.animate();
         }
     }
+
+    public ArrayList<GameElement> getBombs() {
+        return bombs;
+    }
     
     private int rightEnd(){
         int xEnd = -100;

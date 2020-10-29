@@ -2,9 +2,12 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
+import model.Bomb;
 import model.Bullet;
+import model.GameElement;
 import model.Shooter;
 import view.GameBoard;
 
@@ -63,10 +66,16 @@ public class TimerListener implements ActionListener {
     private void processCollision(){
         var shooter = gameBoard.getShooter();
         var enemyComposite = gameBoard.getEnemyComposite();
+        var bombs = new ArrayList<GameElement>();
+        bombs = enemyComposite.getBombs();
 
         shooter.removeBulletsOutOfBounds();
         enemyComposite.removeBombsOutOfBounds();
         enemyComposite.processCollision(shooter);
+        for(var b: bombs){
+            shooter.processCollision(b);
+        }
+
     }
 
     private void update(){

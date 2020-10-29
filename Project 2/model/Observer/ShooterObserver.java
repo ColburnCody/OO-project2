@@ -1,5 +1,6 @@
 package model.Observer;
 
+import model.Shooter;
 import view.GameBoard;
 
 public class ShooterObserver implements Observer {
@@ -21,7 +22,7 @@ public class ShooterObserver implements Observer {
 
     @Override
     public void enemyHitShooter() {
-        // TODO Auto-generated method stub
+        Shooter shooter = gameBoard.getShooter();
 
     }
     

@@ -26,5 +26,4 @@ public class Bomb extends GameElement {
     public void animate() {
         super.y += UNIT_MOVE;
     }
-    
 }
