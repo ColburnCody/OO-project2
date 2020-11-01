@@ -21,6 +21,7 @@ public abstract class GameElement {
         this.height = height;
     }
 
+
     public GameElement(){
         this(0, 0, Color.white, false, 0, 0);
     }

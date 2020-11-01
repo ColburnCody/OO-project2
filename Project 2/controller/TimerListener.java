@@ -4,17 +4,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import java.awt.Color;
-
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import model.Bullet;
+import model.Enemy;
+import model.EnemyComposite;
+import model.GameElement;
 import model.Shooter;
 import view.GameBoard;
 import view.TextDraw;
 
 public class TimerListener implements ActionListener {
 
-    public enum EventType{
+    public enum EventType {
         KEY_RIGHT, KEY_LEFT, KEY_SPACE
     }
 
@@ -23,14 +26,14 @@ public class TimerListener implements ActionListener {
     private final int BOMB_DROP_FREQ = 20;
     private int frameCounter = 0;
 
-    public TimerListener(GameBoard gameBoard){
+    public TimerListener(GameBoard gameBoard) {
         this.gameBoard = gameBoard;
         eventQueue = new LinkedList<>();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(!gameBoard.isGameOver()){
+        if (!gameBoard.isGameOver()) {
             ++frameCounter;
             update();
             processEventQueue();
@@ -39,14 +42,15 @@ public class TimerListener implements ActionListener {
         }
     }
 
-    private void processEventQueue(){
-        while(!eventQueue.isEmpty()){
+    private void processEventQueue() {
+        while (!eventQueue.isEmpty()) {
             var e = eventQueue.getFirst();
             eventQueue.removeFirst();
             Shooter shooter = gameBoard.getShooter();
-            if(shooter == null) return;
+            if (shooter == null)
+                return;
 
-            switch(e){
+            switch (e) {
                 case KEY_LEFT:
                     shooter.moveLeft();
                     break;
@@ -54,28 +58,28 @@ public class TimerListener implements ActionListener {
                     shooter.moveRight();
                     break;
                 case KEY_SPACE:
-                    if(shooter.canFireMoreBullet())
+                    if (shooter.canFireMoreBullet())
                         shooter.getWeapons().add(new Bullet(shooter.x, shooter.y));
                     break;
             }
         }
 
-        if(frameCounter == BOMB_DROP_FREQ){
+        if (frameCounter == BOMB_DROP_FREQ) {
             gameBoard.getEnemyComposite().dropBombs();
             frameCounter = 0;
         }
     }
 
-    private void processCollision(){
+    private void processCollision() {
         var shooter = gameBoard.getShooter();
         var enemyComposite = gameBoard.getEnemyComposite();
 
         shooter.removeBulletsOutOfBounds();
         enemyComposite.removeBombsOutOfBounds();
         enemyComposite.processCollision(shooter);
-        if(enemyComposite.compositeAtBottom()){
+        if (enemyComposite.getMovement().atBottom()) {
             gameBoard.setGameOver(true);
-            gameBoard.getCanvas().getGameElements().add(new TextDraw("You lost! Score: " + gameBoard.getScore(), 100, 100, Color.red, 30));
+            gameBoard.getCanvas().getGameElements().add(new TextDraw("You lose! Score: " + gameBoard.getScore(),100, 100, Color.red, 30));
         }
     }
 

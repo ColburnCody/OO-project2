@@ -36,7 +36,7 @@ public class EnemyComposite extends GameElement{
         }
         movement = new EnemyMovement(this);
     }
-
+    
     public ArrayList<ArrayList<GameElement>> getRows() {
         return rows;
     }
@@ -47,18 +47,6 @@ public class EnemyComposite extends GameElement{
 
     public EnemyMovement getMovement() {
         return movement;
-    }
-
-    public boolean compositeAtBottom(){
-        boolean isAtBottom = false;
-        for(var row: rows){
-            for(var e: row){
-                while(!isAtBottom){
-                    isAtBottom = movement.atBottom();
-                }
-            }
-        }
-        return isAtBottom;
     }
 
     @Override

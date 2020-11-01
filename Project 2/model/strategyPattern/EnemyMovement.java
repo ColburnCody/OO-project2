@@ -37,10 +37,10 @@ public class EnemyMovement implements EnemyMoveStrategy{
 
     @Override
     public boolean atBottom() {
-        var composite = enemy.getRows();
-        for(var c: composite){
-            for(var e: c){
-                if(e.y == GameBoard.HEIGHT){
+        var rows = enemy.getRows();
+        for(var row: rows){
+            for(var e: row){
+                if(e.y >= GameBoard.HEIGHT - EnemyComposite.getEnemySize()){
                     return true;
                 }
             }
