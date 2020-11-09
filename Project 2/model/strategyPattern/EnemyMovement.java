@@ -47,5 +47,12 @@ public class EnemyMovement implements EnemyMoveStrategy{
         }
         return false;
     }
+
+    @Override
+    public boolean speedUp(int x) {
+        if(x >= 10){
+            return true;
+        } else return false;
+    }
     
 }

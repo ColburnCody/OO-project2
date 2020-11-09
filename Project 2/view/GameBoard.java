@@ -42,6 +42,16 @@ public class GameBoard {
 
         Container cp = window.getContentPane();
 
+        JPanel northPanel = new JPanel();
+        scoreDisplay.setText("");
+        JLabel label = new JLabel("Score: ");
+        northPanel.add(label);
+        scoreDisplay.setText("" + score);
+        northPanel.add(scoreDisplay);
+        JButton clearButton = new JButton("Clear score");
+        northPanel.add(clearButton);
+        cp.add(BorderLayout.NORTH, northPanel);
+
         canvas = new MyCanvas(this, WIDTH, HEIGHT);
         cp.add(BorderLayout.CENTER, canvas);
         canvas.addKeyListener(new KeyController(this));
@@ -53,13 +63,9 @@ public class GameBoard {
         JButton quitButton = new JButton("Quit");
         startButton.setFocusable(false);
         quitButton.setFocusable(false);
+        clearButton.setFocusable(false);
 
         JPanel southPanel = new JPanel();
-        scoreDisplay.setText("text");
-        JLabel label = new JLabel("Score: ");
-        southPanel.add(label);
-        scoreDisplay.setText("" + score);
-        southPanel.add(scoreDisplay);
         southPanel.add(startButton);
         southPanel.add(quitButton);
         cp.add(BorderLayout.SOUTH, southPanel);
@@ -81,6 +87,11 @@ public class GameBoard {
             score = 0;
             scoreDisplay.setText("" + score);
             timer.start();
+        });
+
+        clearButton.addActionListener(event -> {
+            score = 0;
+            scoreDisplay.setText("" + score);
         });
 
         quitButton.addActionListener(event -> System.exit(0));

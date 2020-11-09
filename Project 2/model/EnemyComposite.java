@@ -22,6 +22,7 @@ public class EnemyComposite extends GameElement{
     private boolean movingToRight = true;
     private Random random = new Random();
     private EnemyMovement movement;
+    private int hits = 0;
 
     public EnemyComposite(){
         rows = new ArrayList<>();
@@ -66,7 +67,12 @@ public class EnemyComposite extends GameElement{
 
     @Override
     public void animate() {
-        int dx = UNIT_MOVE;
+        int dx;
+        if(movement.speedUp(hits)){
+            dx = UNIT_MOVE + 2;
+        }else{
+            dx = UNIT_MOVE;
+        }
         if(movingToRight){
             if(movement.rightEnd() >= GameBoard.WIDTH){
                 dx = -dx;
@@ -139,6 +145,7 @@ public class EnemyComposite extends GameElement{
                         shooter.notifyObservers(Event.HitEnemy);
                         removeBullets.add(bullet);
                         removeEnemies.add(enemy);
+                        hits++;
                     }
                 }
             }
