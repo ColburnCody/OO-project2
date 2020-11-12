@@ -80,6 +80,10 @@ public class TimerListener implements ActionListener {
         if (enemyComposite.getMovement().atBottom()) {
             gameBoard.setGameOver(true);
             gameBoard.getCanvas().getGameElements().add(new TextDraw("You lose! Score: " + gameBoard.getScore(),100, 100, Color.red, 30));
+            gameBoard.setHighScore(gameBoard.getScore());
+            gameBoard.getHighScoreDisplay().setText("" + gameBoard.getHighScore());
+            gameBoard.setScore(0);
+            gameBoard.getScoreDisplay().setText("" + gameBoard.getScore());
         }
     }
 

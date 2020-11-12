@@ -32,6 +32,8 @@ public class GameBoard {
     private TimerListener timerListener;
     private JLabel scoreDisplay = new JLabel();
     private int score = 0;
+    private JLabel highScoreDisplay = new JLabel();
+    private int highScore = 0;
     private boolean gameOver = true;
 
     public GameBoard(JFrame window){
@@ -50,6 +52,10 @@ public class GameBoard {
         northPanel.add(scoreDisplay);
         JButton clearButton = new JButton("Clear score");
         northPanel.add(clearButton);
+        JLabel hsLabel = new JLabel("High Score: ");
+        highScoreDisplay.setText("" + highScore);
+        northPanel.add(hsLabel);
+        northPanel.add(highScoreDisplay);
         cp.add(BorderLayout.NORTH, northPanel);
 
         canvas = new MyCanvas(this, WIDTH, HEIGHT);
@@ -84,18 +90,28 @@ public class GameBoard {
             canvas.getGameElements().clear();
             canvas.getGameElements().add(shooter);
             canvas.getGameElements().add(enemyComposite);
-            score = 0;
-            scoreDisplay.setText("" + score);
             timer.start();
         });
 
         clearButton.addActionListener(event -> {
-            score = 0;
-            scoreDisplay.setText("" + score);
+            highScore = 0;
+            highScoreDisplay.setText("" + highScore);
         });
 
         quitButton.addActionListener(event -> System.exit(0));
 
+    }
+
+    public int getHighScore() {
+        return highScore;
+    }
+
+    public void setHighScore(int highScore) {
+        this.highScore = highScore;
+    }
+
+    public JLabel getHighScoreDisplay() {
+        return highScoreDisplay;
     }
 
     public JFrame getWindow() {

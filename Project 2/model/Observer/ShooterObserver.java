@@ -37,6 +37,10 @@ public class ShooterObserver implements Observer {
             gameBoard.setGameOver(true);
             int score = gameBoard.getScore();
             gameBoard.getCanvas().getGameElements().add(new TextDraw("You lost! Score: " + score, 100, 100, Color.red, 30));
+            gameBoard.setHighScore(score);
+            gameBoard.getHighScoreDisplay().setText("" + gameBoard.getHighScore());
+            gameBoard.setScore(0);
+            gameBoard.getScoreDisplay().setText("" + gameBoard.getScore());
         }
     }
     
