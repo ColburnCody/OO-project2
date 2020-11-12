@@ -4,13 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import java.awt.Color;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 import model.Bullet;
-import model.Enemy;
-import model.EnemyComposite;
-import model.GameElement;
 import model.Shooter;
 import view.GameBoard;
 import view.TextDraw;
