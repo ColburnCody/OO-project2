@@ -5,12 +5,13 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import model.Shooter.Event;
+import model.decoratorPattern.WeaponComponent;
 import model.strategyPattern.EnemyMovement;
 import view.GameBoard;
 
 import java.awt.Color;
 
-public class EnemyComposite extends GameElement{
+public class EnemyComposite extends GameElement implements WeaponComponent{
 
     public static final int NROWS = 2;
     public static final int NCOLS = 10;
@@ -113,7 +114,8 @@ public class EnemyComposite extends GameElement{
         return bombs;
     }
 
-    public void dropBombs(){
+    @Override
+    public void shoot() {
         for(var row: rows){
             for(var e: row){
                 if(random.nextFloat() < 0.1F){

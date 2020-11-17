@@ -61,7 +61,7 @@ public class TimerListener implements ActionListener {
         }
 
         if (frameCounter == BOMB_DROP_FREQ) {
-            gameBoard.getEnemyComposite().dropBombs();
+            gameBoard.getEnemyComposite().shoot();
             frameCounter = 0;
         }
     }

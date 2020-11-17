@@ -1,9 +1,11 @@
 package model;
 
 import java.awt.Graphics2D;
+
+
 import java.awt.Color;
 
-public class Bomb extends GameElement {
+public class Bomb extends GameElement{
 
     public static final int SIZE = 5;
     public static final int UNIT_MOVE = 5;
